@@ -1,18 +1,40 @@
 package directory.clases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Doctor extends Funcionario{
+/**
+ * @author Marco y Francisco
+ */
+public class Doctor extends FuncionarioMedicina{
   // Atributos.
   private int codigoMedico;
   private ArrayList<String> especialidades;
 
   /**
-   * Constructor de la clase.
+   * Metodo constructor
+   * @param usuario nombre de usuario
+   * @param contrasehna contrasehna
+   * @param nombre Nombre del funcionario
+   * @param cedula Cedula del funcionario
+   * @param codigoMedico Codigo de medico
+   * @param especialidades espcialidades de medicina
    */
-  public Doctor() {
-    ;
+  public Doctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico, ArrayList<String> especialidades, LocalDate localDate) {
+    this.codigoMedico = codigoMedico;
+    this.especialidades = especialidades;
+    this.setUsuario(usuario);
+    this.setContrasenha(contrasehna);
+    this.setNombre(nombre);
+    this.setCedula(cedula);
+    this.setTipo("Doctor");
+    this.setFechaIngreso(localDate);
+
   }
+
+  /* FUNCIONALIDADES DOCTOR */
+  public void aplicarVacuna(Paciente paciente) {}
+  public void atenderCita(Paciente paciente){}
 
   // Metodos accesores.
   public int getCodigoMedico() {

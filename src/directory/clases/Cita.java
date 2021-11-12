@@ -2,6 +2,9 @@ package directory.clases;
 
 import java.time.LocalDate;
 
+/**
+ * @author Marco
+ */
 public class Cita {
   // Atributos.
   private String especialidad; //area
@@ -9,12 +12,29 @@ public class Cita {
   private String comentario;
   private int identificador;
   private String estadoCita;
+  private String bitacora;
 
   /**
-   * Constructor de la clase.
+   * Metodo constructor
+   * @param especialidad area en que se realizara la cita
+   * @param fechaCita fecha de la cita
+   * @param comentario comentario de razon de la cita
+   * @param identificador id de la cita
    */
-  public Cita() {
-    ;
+  public Cita (String especialidad, LocalDate fechaCita, String comentario, int identificador) {
+    this.especialidad = especialidad;
+    this.fechaCita = fechaCita;
+    this.comentario = comentario;
+    this.identificador = identificador;
+    this.bitacora = "Se ha registrado la cita\n";
+  }
+
+  /**
+   * Metodo que agrega un comentario a la bitacora de la cita
+   * @return void
+   */
+  public void actualizarBitacora(String comentarioAgregado) {
+    this.bitacora = this.bitacora + comentarioAgregado + "\n";
   }
 
   // Metodos accesores.

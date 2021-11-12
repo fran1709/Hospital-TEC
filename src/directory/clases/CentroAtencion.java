@@ -1,5 +1,8 @@
 package directory.clases;
 
+/**
+ * @author Marco
+ */
 public class CentroAtencion {
   // Atributos.
   private int codigo;
@@ -7,14 +10,24 @@ public class CentroAtencion {
   private String nombre;
   private String lugarUbicacion;
   private String tipo;
-
   /**
    * Constructor de clase.
-   * Sin parametros.
+   * @param capacidadPacientes capacidadDePacientes
+   * @param codigo codiog del centro autonumerico
+   * @param lugarUbicacion lugar donde se ubica
+   * @param nombre nombre del cenrtro
+   * @param tipo tipo de centro (Clinica, Hospuital, EBAIS,....)
    */
-  public CentroAtencion() {
-    ;
+  public CentroAtencion (int codigo, int capacidadPacientes, String nombre, String lugarUbicacion, String tipo) {
+    this.codigo = codigo;
+    this.capacidadPacientes = capacidadPacientes;
+    this.nombre = nombre;
+    this.lugarUbicacion = lugarUbicacion;
+    this.tipo = tipo;
   }
+
+
+
 
   // Metods accesores.
   public int getCodigo() {

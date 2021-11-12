@@ -3,10 +3,11 @@ package directory.clases;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Paciente {
+/**
+ * @author Marco y Francisco
+ */
+public class Paciente extends Usuario{
   //Atributos
-  private String cedula;
-  private String nombre;
   private LocalDate fechaNacimiento;
   private String tipoSangre;
   private String nacionalidad;
@@ -15,25 +16,42 @@ public class Paciente {
   private ArrayList<Vacuna> vacunasAplicadas;
 
   /**
-   * Constructor de la clase.
+   *  Constructor de clase
+   * @param usuario
+   * @param contrasehna
+   * @param nombre
+   * @param cedula
+   * @param fechaNacimiento
+   * @param tipoSangre
+   * @param nacionalidad
+   * @param lugarResidencia
+   * @param numerosTelefonicos
+   * @param vacunasAplicadas
    */
-  public Paciente() {
-    ;
+  public Paciente(String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaNacimiento, String tipoSangre,
+                  String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas) {
+    this.fechaNacimiento = fechaNacimiento;
+    this.tipoSangre = tipoSangre;
+    this.nacionalidad = nacionalidad;
+    this.lugarResidencia = lugarResidencia;
+    this.numerosTelefonicos = numerosTelefonicos;
+    this.vacunasAplicadas = vacunasAplicadas;
+    this.setUsuario(usuario);
+    this.setContrasenha(contrasehna);
+    this.setNombre(nombre);
+    this.setCedula(cedula);
   }
 
+  /* FUNCIONALIDADES DEL PACIENTE */
+  public void solicitarCita(){}
+  public void cancelarCita(){}
+  public String citasDePaciente(){ return "";}
+  public String diagnosticosPaciente(){return "";}
+  public String tratamientosPaciente(){return "";}
+  public String historialPaciente(){return "";}
+
+
   // Metodos accesores.
-  public String getCedula() {
-    return cedula;
-  }
-  public void setCedula(String cedula) {
-    this.cedula = cedula;
-  }
-  public String getNombre() {
-    return nombre;
-  }
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
   public LocalDate getFechaNacimiento() {
     return fechaNacimiento;
   }

@@ -23,13 +23,8 @@ public class Secretaria extends Funcionario{
     }
 
     /* FUNCIONALIDADES SECRETARIA */
-    public void cancelarCita(Paciente paciente) {
-
-    }
-
-    public void asignarCita(Paciente paciente) {
-
-    }
+    public void cancelarCita(Paciente paciente) {}
+    public void asignarCita(Paciente paciente) {}
     public void citasRegistradasEnSistema(int casoDeOrden) {}
     public void hospitalizacionesEnSistema(int casoDeOrden) {}
 

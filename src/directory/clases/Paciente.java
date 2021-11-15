@@ -2,18 +2,23 @@ package directory.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Marco y Francisco
  */
 public class Paciente extends Usuario{
   //Atributos
-  private LocalDate fechaNacimiento;
+  private Date fechaNacimiento;
   private String tipoSangre;
   private String nacionalidad;
   private String lugarResidencia;
   private ArrayList<String> numerosTelefonicos;
   private ArrayList<Vacuna> vacunasAplicadas;
+  private String historial;
+  private ArrayList<Cita> citas;
+  private ArrayList<Diagnostico> diagnosticos;
+  private ArrayList<Tratamiento> tratamientos;
 
   /**
    *  Constructor de clase
@@ -28,7 +33,7 @@ public class Paciente extends Usuario{
    * @param numerosTelefonicos
    * @param vacunasAplicadas
    */
-  public Paciente(String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaNacimiento, String tipoSangre,
+  public Paciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
                   String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas) {
     this.fechaNacimiento = fechaNacimiento;
     this.tipoSangre = tipoSangre;
@@ -40,22 +45,180 @@ public class Paciente extends Usuario{
     this.setContrasenha(contrasehna);
     this.setNombre(nombre);
     this.setCedula(cedula);
+    this.historial = "Se ha registrado al paciente en el sistema. Fecha:" + LocalDate.now() + "\n";
   }
 
   /* FUNCIONALIDADES DEL PACIENTE */
-  public void solicitarCita(){}
-  public void cancelarCita(){}
-  public String citasDePaciente(){ return "";}
-  public String diagnosticosPaciente(){return "";}
-  public String tratamientosPaciente(){return "";}
-  public String historialPaciente(){return "";}
+
+  /**
+   * Agregar cita ya validada a la lista de citas
+   * @param cita cita que va a ser anhadida
+   */
+  public void solicitarCita(Cita cita){
+    cita.setEstadoCita("Registrada");
+    this.citas.add(cita);
+    this.historial += "Se ha registrado la cita" + cita.getIdentificador() + "en el sistema. Fecha:" + LocalDate.now() + "\n";
+  }
+
+  /**
+   * Cancela una cita
+   * @param identificarCita
+   */
+  public void cancelarCita(int identificarCita){
+    for (Cita cita : this.citas) {
+      cita.setEstadoCita("Cancelada por paciente");
+      this.historial += "Se ha cancelado la cita" + cita.getIdentificador() + "en el sistema. Fecha:" + LocalDate.now() + "\n";
+    }
+  }
+
+  /** CONSULTAS DE CITAS **/
+  /**
+   * Retorna un array de citas de acuerdo al estado que se desee
+   * @param estado
+   * @return
+   */
+  public ArrayList<Cita> citasDePacientePorEstado (String estado) {
+    ArrayList<Cita> tmp = new ArrayList<>();
+    for (Cita cita : this.citas) {
+      if (cita.getEstadoCita().equals(estado)) {
+        tmp.add(cita);
+      }
+    }
+    return tmp;
+  }
+
+  /**
+   * Retorna un array de citas de acuerdo a la especialiddd que se desee
+   * @param especialidad
+   * @return
+   */
+  public ArrayList<Cita> citasDePacientePorEspecialidad (String especialidad) {
+    ArrayList<Cita> tmp = new ArrayList<>();
+    for (Cita cita : this.citas) {
+      if (cita.getEspecialidad().equals(especialidad)) {
+        tmp.add(cita);
+      }
+    }
+    return tmp;
+  }
+
+  /**
+   * Retorna un array de citas por un rango de fechas dado
+   * @param fechaFinal
+   * @param fechaInicio
+   * @return
+   */
+  public ArrayList<Cita> citasDePacientePorFecha (Date fechaInicio, Date fechaFinal) {
+    ArrayList<Cita> tmp = new ArrayList<>();
+    for (Cita cita : this.citas) {
+      if (fechaInicio.after(cita.getFechaCita()) && fechaFinal.before(fechaFinal)){
+        tmp.add(cita);
+      }
+    }
+    return tmp;
+  }
+  /** CONSULTAS DE DIAGNOSTICOS **/
+  /**
+   * Retorna diagnosticos del paciente de acuerdo a un nivel
+   * @param nivel
+   * @return
+   */
+  public ArrayList<Diagnostico> diagnosticosPorNivel (String nivel) {
+    ArrayList<Diagnostico> tmp = new ArrayList<>();
+    for (Cita cita: this.citas) {
+      for (Diagnostico diagnostico : cita.getDiagnosticos()) {
+        if (diagnostico.getNivel().equals(nivel))
+          tmp.add(diagnostico);
+      }
+    }
+    return tmp;
+  }
+  /**
+   * Retorna una lista de diagnosticos del paciente de acuerdo al nombre dado
+   * @param nombre
+   * @return
+   */
+  public ArrayList<Diagnostico> diagnosticosPorNombre (String nombre) {
+    ArrayList<Diagnostico> tmp = new ArrayList<>();
+    for (Cita cita: this.citas) {
+      for (Diagnostico diagnostico : cita.getDiagnosticos()) {
+        if (diagnostico.getNombre().equals(nombre))
+          tmp.add(diagnostico);
+      }
+    }
+    return tmp;
+  }
+
+  /**
+   * Retorna una lista de diagnostivos por las citas de una fecha determinada
+   * @param fechaInicio
+   * @param fechaFinal
+   * @return
+   */
+  public ArrayList<Diagnostico> diagnosticosPorFecha (Date fechaInicio, Date fechaFinal) {
+    ArrayList<Cita> pCitas = this.citasDePacientePorFecha(fechaInicio,fechaFinal);
+    ArrayList<Diagnostico> tmp = new ArrayList<>();
+    for (Cita cita : pCitas) {
+      tmp.addAll(cita.getDiagnosticos());
+    }
+    return tmp;
+  }
+
+  /** CONSULTAS DE TRATAMIENTOS **/
+  /**
+   * Retorna una lista de tratamientos por fecha
+   * @param fechaInicio
+   * @param fechaFinal
+   * @return
+   */
+  public ArrayList<Tratamiento> tratamientosPorFecha(Date fechaInicio, Date fechaFinal){
+    ArrayList<Diagnostico> pDiagnosticos = this.diagnosticosPorFecha(fechaInicio,fechaFinal);
+    ArrayList<Tratamiento> tmp = new ArrayList<>();
+
+    for (Diagnostico diagnostico : pDiagnosticos) {
+      tmp.addAll(diagnostico.getTratamientos());
+    }
+    return tmp;
+  }
+
+  /**
+   * Metodo que ayuda a crear una lista de los tratamientos del paciente por tipo
+   * @param tipo
+   * @return
+   */
+  public ArrayList<Tratamiento> tratamientosPorTipo(String tipo){
+    ArrayList<Tratamiento> trats = new ArrayList<>();
+    for (Cita cita : this.citas) {
+      trats.addAll(cita.tratamientosPorTipo(tipo));
+    }
+    return trats;
+  }
+
+  /**
+   * Metodo que ayuda a crear una lista de los tratamientos de paciente por nombre
+   * @param nombre
+   * @return
+   */
+  public ArrayList<Tratamiento> tratamientosPorNombre (String nombre ) {
+    ArrayList<Tratamiento> trats = new ArrayList<>();
+    for (Cita cita : this.citas) {
+      trats.addAll(cita.tratamientosPorNombre(nombre));
+    }
+    return trats;
+  }
+
+  /**
+   * Pone el historial de hospitalizaciones
+   * @return
+   */
+  public String historialPaciente(){return this.historial;}
 
 
   // Metodos accesores.
-  public LocalDate getFechaNacimiento() {
+  public Date getFechaNacimiento() {
     return fechaNacimiento;
   }
-  public void setFechaNacimiento(LocalDate fechaNacimiento) {
+  public void setFechaNacimiento(Date fechaNacimiento) {
     this.fechaNacimiento = fechaNacimiento;
   }
   public String getTipoSangre() {
@@ -88,4 +251,6 @@ public class Paciente extends Usuario{
   public void setVacunasAplicadas(ArrayList<Vacuna> vacunasAplicadas) {
     this.vacunasAplicadas = vacunasAplicadas;
   }
+
+
 }

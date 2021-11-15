@@ -1,5 +1,7 @@
 package directory.clases;
 
+import java.util.ArrayList;
+
 /**
  * @author Marco
  */
@@ -10,6 +12,7 @@ public class CentroAtencion {
   private String nombre;
   private String lugarUbicacion;
   private String tipo;
+  private ArrayList<Funcionario> funcionarios;
   /**
    * Constructor de clase.
    * @param capacidadPacientes capacidadDePacientes
@@ -26,9 +29,13 @@ public class CentroAtencion {
     this.tipo = tipo;
   }
 
-
-
-
+  /**
+   *
+   * @return
+   */
+  public void agregarFuncionario(Funcionario funcionario) {
+    this.funcionarios.add(funcionario);
+  }
   // Metods accesores.
   public int getCodigo() {
     return this.codigo;

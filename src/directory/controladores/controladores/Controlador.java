@@ -159,9 +159,20 @@ public class Controlador {
         System.out.println("El usuario no es valido");
     }
 
-    /** MANEJO DE CITAS **/
+    /**
+     * Metodo para sacar los pacientes de la lista de usuarios
+     * @return
+     */
+    public ArrayList<Paciente> getListaPacientes(){
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        for (Usuario usuario : this.usuarios) {
+            if (usuario instanceof Paciente) {
+                pacientes.add((Paciente) usuario);
+            }
 
-
+        }
+        return pacientes;
+    }
 
 
 }

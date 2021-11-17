@@ -1,6 +1,7 @@
 package directory.clases;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -33,8 +34,30 @@ public class Doctor extends FuncionarioMedicina{
   }
 
   /* FUNCIONALIDADES DOCTOR */
-  public void aplicarVacuna(Paciente paciente) {}
-  public void atenderCita(Paciente paciente){}
+  /**
+   * Metodo para atender cita
+   * @param paciente
+   * @param cita
+   * @param diagnosticos
+   */
+  public void atenderCita(Paciente paciente, Cita cita,ArrayList<Diagnostico> diagnosticos){
+    if (!diagnosticos.isEmpty()) {
+      cita.getDiagnosticos().addAll(diagnosticos);
+      cita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha atendido la cita a nombre del funcionario de medicina " + this.getNombre());
+      cita.setEstadoCita("Realizada");
+      paciente.actualizarHistorial("Se ha atendido la cita ID: " + cita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());
+    }
+
+  }
+
+  /**
+   * Metodo para aplicar vacuna
+   * @param paciente
+   */
+  public void aplicarVacuna(Paciente paciente) {
+    Vacuna vacuna = new Vacuna();
+  }
+
 
   // Metodos accesores.
   public int getCodigoMedico() {

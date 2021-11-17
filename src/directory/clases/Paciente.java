@@ -212,7 +212,13 @@ public class Paciente extends Usuario{
    * @return
    */
   public String historialPaciente(){return this.historial;}
-
+  /**
+   * Metodo para actualizar historial de paciente
+   * @return
+   */
+  public void actualizarHistorial(String bitacora) {
+    this.historial += bitacora +" Fecha: " + LocalDate.now();
+  }
 
   // Metodos accesores.
   public Date getFechaNacimiento() {
@@ -250,6 +256,29 @@ public class Paciente extends Usuario{
   }
   public void setVacunasAplicadas(ArrayList<Vacuna> vacunasAplicadas) {
     this.vacunasAplicadas = vacunasAplicadas;
+  }
+  public ArrayList<Cita> getCitas() {
+    return citas;
+  }
+
+  public void setCitas(ArrayList<Cita> citas) {
+    this.citas = citas;
+  }
+
+  public ArrayList<Diagnostico> getDiagnosticos() {
+    return diagnosticos;
+  }
+
+  public void setDiagnosticos(ArrayList<Diagnostico> diagnosticos) {
+    this.diagnosticos = diagnosticos;
+  }
+
+  public ArrayList<Tratamiento> getTratamientos() {
+    return tratamientos;
+  }
+
+  public void setTratamientos(ArrayList<Tratamiento> tratamientos) {
+    this.tratamientos = tratamientos;
   }
 
 

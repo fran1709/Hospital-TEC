@@ -30,6 +30,7 @@ public class Cita {
     this.comentario = comentario;
     this.identificador = identificador;
     this.bitacora = "Se ha registrado la cita\n";
+    this.estadoCita = "Registrada";
   }
 
   /**

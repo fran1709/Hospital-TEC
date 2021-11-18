@@ -10,7 +10,7 @@ public abstract class Funcionario extends Usuario {
   //Atributos.
   private String tipo; //(Doctor(a), Enfermero(a), Secretario(a))
   private String areaTrabajo;
-  private Date fechaIngreso;
+  private LocalDate fechaIngreso;
 
 
 
@@ -28,10 +28,10 @@ public abstract class Funcionario extends Usuario {
   public void setAreaTrabajo(String pAreaTrabajo) {
     this.areaTrabajo = pAreaTrabajo;
   }
-  public Date getFechaIngreso() {
+  public LocalDate getFechaIngreso() {
     return fechaIngreso;
   }
-  public void setFechaIngreso(Date pFechaIngreso) {
+  public void setFechaIngreso(LocalDate pFechaIngreso) {
     this.fechaIngreso = pFechaIngreso;
   }
 }

@@ -22,7 +22,7 @@ public class Doctor extends FuncionarioMedicina{
    * @param codigoMedico Codigo de medico
    * @param especialidades espcialidades de medicina
    */
-  public Doctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico, ArrayList<String> especialidades, Date localDate) {
+  public Doctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico, ArrayList<String> especialidades, LocalDate localDate) {
     this.codigoMedico = codigoMedico;
     this.especialidades = especialidades;
     this.setUsuario(usuario);

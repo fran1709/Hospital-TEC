@@ -23,7 +23,6 @@ public class Registrar extends JFrame{
     setTitle("Hospital TEC");
     setSize(450,300);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setVisible(true);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
 

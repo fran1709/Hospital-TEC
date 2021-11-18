@@ -27,10 +27,11 @@ public class CentroAtencion {
     this.nombre = nombre;
     this.lugarUbicacion = lugarUbicacion;
     this.tipo = tipo;
+    this.funcionarios = new ArrayList<>();
   }
 
   /**
-   *
+   * Metodo para agregar funcionarios
    * @return
    */
   public void agregarFuncionario(Funcionario funcionario) {

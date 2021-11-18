@@ -5,24 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-/**
- * @author Francisco Ovares Rojas
- */
-public class DocAccount extends JFrame{
-  private JPanel DocAccWindow;
-  private JLabel jlTitle;
+public class SecreAcc extends JFrame{
+  private JPanel SecreAccWindow;
   private JButton cerrarSesionButton;
+  private JComboBox cbPacientes;
   private JButton registrarCitaButton;
   private JButton cancelarCitaButton;
-  private JButton atenderCitaButton;
-  private JButton reportesButton;
-  private JComboBox cbPacientes;
-  private JComboBox cbPacientes3;
   private JComboBox cbPacientes2;
+  private JButton reportesButton;
 
-  public DocAccount() {
+  public SecreAcc() {
     // Atributos.
-    setContentPane(DocAccWindow);
+    setContentPane(SecreAccWindow);
     setTitle("Hospital TEC");
     setSize(450,300);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,23 +30,10 @@ public class DocAccount extends JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "¡Hasta Pronto Doctor(a)!");
+        JOptionPane.showMessageDialog(null, "¡Hasta Pronto Secretario(a)!");
         setVisible(false);
         MainGui menuPincipal = new MainGui();
         menuPincipal.setVisible(true);
-      }
-    });
-
-    atenderCitaButton.addActionListener(new ActionListener() {
-      /**
-       * Abre ventana para atender cita del paciente seleccionado.
-       * @param e
-       */
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        setVisible(false);
-        AtenderCita atendiendo = new AtenderCita();
-        atendiendo.setVisible(true);
       }
     });
 
@@ -63,7 +44,6 @@ public class DocAccount extends JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
-        //setVisible(false);
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
       }

@@ -5,25 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Reporte extends JFrame{
-  private JPanel ReportesWindow;
-  private JTable jtableReportes;
-  private JButton generarButton;
+public class CancelaCita extends JFrame{
+  private JPanel CancelaCitaWindow;
+  private JComboBox cbCitas;
+  private JButton cancelarButton;
   private JButton volverButton;
-  private JComboBox cbPacientes;
-  private JComboBox cbReportes;
-  private JTextField tfAnhio;
-  private JTextField tfMes;
-  private JTextField tfDia;
-  private JTextField tfAnhioFinal;
-  private JTextField tfMesFinal;
-  private JTextField tfDiaFinal;
 
-  public Reporte() {
+  public CancelaCita() {
     // Atributos.
-    setContentPane(ReportesWindow);
+    setContentPane(CancelaCitaWindow);
     setTitle("Hospital TEC");
-    setSize(650,600);
+    setSize(450,300);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
@@ -39,9 +31,9 @@ public class Reporte extends JFrame{
       }
     });
 
-    generarButton.addActionListener(new ActionListener() {
+    cancelarButton.addActionListener(new ActionListener() {
       /**
-       * Genera y muestra los resultados del reporte deseado.
+       * Cancela la cita seleccionada.
        * @param e
        */
       @Override

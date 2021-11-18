@@ -26,6 +26,7 @@ public class LogIn extends JFrame{
   private JLabel jlUser;
 
   public LogIn() {
+    // Atributos.
     setContentPane(panel1);
     setTitle("Hospital TEC");
     setSize(450,300);
@@ -64,15 +65,22 @@ public class LogIn extends JFrame{
               // Validar el tipo de credenciales .
 
               // Usuarios prueba
+              //lista de prueba
+              ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+              // usuario doctor
               ArrayList<String> especial = new ArrayList<String>();
               LocalDate fecha = LocalDate.now();
               Doctor one = new Doctor("fran17", "123", "Francisco Javier", "207710202",
                                       1709,especial, fecha);
-              ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
               usuarios.add(one);
+              // usuario enfermero
               Enfermero two = new Enfermero("sandra05", "123", "Sandra Piedra", "207710082",
                       true, true,fecha);
               usuarios.add(two);
+              // usuario secretario
+              Secretaria secre = new Secretaria("ana21","123","Ana Ruth","207710203",
+                      fecha);
+              usuarios.add(secre);
               // Fin usuarios prueba
 
               // necesario cambiar el ArrayList -> usuarios por la que almacena todos los que serán creados.
@@ -96,7 +104,8 @@ public class LogIn extends JFrame{
                   else if (userActual.getClass() == Secretaria.class) {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                       setVisible(false);
-                      // Falta agregar secreAcc
+                      SecreAcc secreta = new SecreAcc();
+                      secreta.setVisible(true);
                   }
                   else {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");

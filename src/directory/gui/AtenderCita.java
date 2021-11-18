@@ -37,8 +37,8 @@ public class AtenderCita extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        DocAccount newDocAcc = new DocAccount();
-        newDocAcc.setVisible(true);
+        //DocAccount newDocAcc = new DocAccount();
+        //newDocAcc.setVisible(true);
       }
     });
 

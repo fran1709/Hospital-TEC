@@ -18,6 +18,7 @@ public class NuserAccount extends  JFrame{
   private JButton reportesButton;
 
   public NuserAccount() {
+    // Atributos.
     setContentPane(panel1);
     setTitle("Hospital TEC");
     setSize(450,300);
@@ -49,6 +50,30 @@ public class NuserAccount extends  JFrame{
         //setVisible(false);
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
+      }
+    });
+
+    cancelarCitaButton.addActionListener(new ActionListener() {
+      /**
+       * Abre la ventana para cancelar una cita del paciente seleccionado.
+       * @param e
+       */
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        CancelaCita cancelacion = new CancelaCita();
+        cancelacion.setVisible(true);
+      }
+    });
+
+    reportesButton.addActionListener(new ActionListener() {
+      /**
+       * Abre la ventana para acceder a los reportes.
+       * @param e
+       */
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Reporte reporte = new Reporte();
+        reporte.setVisible(true);
       }
     });
   }

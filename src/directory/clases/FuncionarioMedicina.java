@@ -53,7 +53,7 @@ public class FuncionarioMedicina extends Funcionario{
      * @param fechaFinal
      * @return
      */
-    public ArrayList<Diagnostico> diagnosticosPacientePorFecha(Paciente paciente, Date fechaInicio, Date fechaFinal){
+    public ArrayList<Diagnostico> diagnosticosPacientePorFecha(Paciente paciente, Date fechaInicio, Date fechaFinal) {
         return paciente.diagnosticosPorFecha(fechaInicio,fechaFinal);
     }
 

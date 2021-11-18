@@ -3,6 +3,7 @@ package directory.clases;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Marco y Francisco
@@ -21,7 +22,7 @@ public class Doctor extends FuncionarioMedicina{
    * @param codigoMedico Codigo de medico
    * @param especialidades espcialidades de medicina
    */
-  public Doctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico, ArrayList<String> especialidades, LocalDate localDate) {
+  public Doctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico, ArrayList<String> especialidades, Date localDate) {
     this.codigoMedico = codigoMedico;
     this.especialidades = especialidades;
     this.setUsuario(usuario);
@@ -40,14 +41,16 @@ public class Doctor extends FuncionarioMedicina{
    * @param cita
    * @param diagnosticos
    */
-  public void atenderCita(Paciente paciente, Cita cita,ArrayList<Diagnostico> diagnosticos){
-    if (!diagnosticos.isEmpty()) {
-      cita.getDiagnosticos().addAll(diagnosticos);
-      cita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha atendido la cita a nombre del funcionario de medicina " + this.getNombre());
-      cita.setEstadoCita("Realizada");
-      paciente.actualizarHistorial("Se ha atendido la cita ID: " + cita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());
+  public void atenderCita(Paciente paciente, Cita cita,ArrayList<Diagnostico> diagnosticos) {
+    if (cita.getEstadoCita().equals("Registrada") | cita.getEstadoCita().equals("Asignada")){
+      if (!diagnosticos.isEmpty()) {
+        cita.getDiagnosticos().addAll(diagnosticos);
+        cita.actualizarBitacora("Fecha: " + LocalDateTime.now() + "Se ha atendido la cita a nombre del funcionario de medicina " + this.getNombre());
+        cita.setEstadoCita("Realizada");
+        paciente.actualizarHistorial("Se ha atendido la cita ID: " + cita.getIdentificador() + " a nombre del funcionario de medicina " + this.getNombre());
+      }
     }
-
+    System.out.println("La cita no tiene el estado Registrada o Asignada.");
   }
 
   /**

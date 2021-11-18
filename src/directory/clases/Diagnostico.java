@@ -13,6 +13,7 @@ public class Diagnostico {
     //Atributos
     private String nombre;
     private String nivel;
+    private ArrayList<Tratamiento> tratamientos;
 
     /**
      * Retorna tratamientos por tipo
@@ -52,7 +53,6 @@ public class Diagnostico {
         this.tratamientos = tratamientos;
     }
 
-    private ArrayList<Tratamiento> tratamientos;
 
     public String getNombre() {
         return nombre;

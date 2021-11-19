@@ -20,7 +20,7 @@ public class Enfermero extends FuncionarioMedicina{
    * @param dirigioPersonas Ha tenido personas a su cargo
    * @param expeCapacitando Ha tnido experiencia en capacitaciones a pacientes
    */
-  public Enfermero (String usuario, String contrasehna, String nombre, String cedula, boolean dirigioPersonas, boolean expeCapacitando, Date localDate) {
+  public Enfermero (String usuario, String contrasehna, String nombre, String cedula, boolean dirigioPersonas, boolean expeCapacitando, LocalDate localDate) {
     this.dirigioPersonas = dirigioPersonas;
     this.expeCapacitando = expeCapacitando;
     this.setUsuario(usuario);

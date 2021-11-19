@@ -2,6 +2,7 @@ package directory.controladores.controladores;
 
 import directory.clases.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -78,7 +79,7 @@ public class Controlador {
      * @param numerosTelefonicos
      * @param vacunasAplicadas
      */
-    public void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
+    public void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaNacimiento, String tipoSangre,
                                   String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
@@ -113,7 +114,7 @@ public class Controlador {
      * @param especialidades
      */
     public void registrarDoctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico,
-                                 ArrayList<String> especialidades, Date fechaDeIngreso, int codigoCentro){
+                                 ArrayList<String> especialidades, LocalDate fechaDeIngreso, int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Doctor newDoctor = new Doctor(usuario, contrasehna, nombre, cedula, codigoMedico, especialidades, fechaDeIngreso);
@@ -151,7 +152,7 @@ public class Controlador {
      * @param expeCapacitando
      */
     public void registrarEnfermero (String nombre, String usuario, String contrasehna, String cedula, boolean dirigioPersonas,
-                                    boolean expeCapacitando, Date fechaDeIngreso, int codigoCentro){
+                                    boolean expeCapacitando, LocalDate fechaDeIngreso, int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Enfermero newEnfermero = new Enfermero(usuario, contrasehna, nombre, cedula, dirigioPersonas, expeCapacitando, fechaDeIngreso);
@@ -187,7 +188,7 @@ public class Controlador {
      * @param nombre
      * @param cedula
      */
-    public void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, Date fechaDeIngreso , int codigoCentro){
+    public void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaDeIngreso , int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Secretaria newSecretaria = new Secretaria(usuario, contrasehna, nombre, cedula, fechaDeIngreso);

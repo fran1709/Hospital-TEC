@@ -13,9 +13,9 @@ public class MainGui extends JFrame{
   private JButton inciarSesionButton;
   private JButton registrarseButton;
   private JButton salirButton;
-    private JLabel jlTitle;
+  private JLabel jlTitle;
 
-    public MainGui() {
+  public MainGui() {
     // Atributos.
     setContentPane(mainWindow);
     setTitle("Hospital TEC");
@@ -46,6 +46,19 @@ public class MainGui extends JFrame{
         setVisible(false);
         Registrar nuevoRegistro = new Registrar();
         nuevoRegistro.setVisible(true);
+      }
+    });
+
+    inciarSesionButton.addActionListener(new ActionListener() {
+      /**
+       * Abre ventana para logear como usuario.
+       * @param e
+       */
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setVisible(false);
+        LogIn newLog = new LogIn();
+        newLog.setVisible(true);
       }
     });
   }

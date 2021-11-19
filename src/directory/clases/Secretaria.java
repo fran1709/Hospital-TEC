@@ -16,7 +16,7 @@ public class Secretaria extends Funcionario{
      * @param nombre
      * @param cedula
      */
-    public Secretaria (String usuario, String contrasehna, String nombre, String cedula, Date localDate) {
+    public Secretaria (String usuario, String contrasehna, String nombre, String cedula, LocalDate localDate) {
         this.setUsuario(usuario);
         this.setContrasenha(contrasehna);
         this.setNombre(nombre);

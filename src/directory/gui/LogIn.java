@@ -1,9 +1,9 @@
 package directory.gui;
 
+import directory.clases.*;
 import directory.clases.Doctor;
 import directory.clases.Enfermero;
-import directory.clases.Secretaria;
-import directory.clases.Usuario;
+import directory.clases.Paciente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -81,6 +81,13 @@ public class LogIn extends JFrame{
               Secretaria secre = new Secretaria("ana21","123","Ana Ruth","207710203",
                       fecha);
               usuarios.add(secre);
+              // usuario paciente
+              ArrayList<String> numeros = new ArrayList<String>();
+              ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+              Paciente keilor = new Paciente("keilor","123","Keilor Rojas","207710204",
+                                             fecha,"A+","Costarricense", "Santa Rosa",
+                                             numeros,vacunas);
+              usuarios.add(keilor);
               // Fin usuarios prueba
 
               // necesario cambiar el ArrayList -> usuarios por la que almacena todos los que serán creados.
@@ -110,7 +117,8 @@ public class LogIn extends JFrame{
                   else {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                       setVisible(false);
-                      // Falta agregar pascienteAcc
+                      PacientAcc pacient = new PacientAcc();
+                      pacient.setVisible(true);
                   }
                 }
               }

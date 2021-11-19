@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * @author Francisco Ovares Rojas
+ */
 public class CancelaCita extends JFrame{
   private JPanel CancelaCitaWindow;
   private JComboBox cbCitas;

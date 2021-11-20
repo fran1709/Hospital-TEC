@@ -1,1 +1,21 @@
-[{"fechaNacimiento":"17 nov. 2021 21:59:43","tipoSangre":"B-","nacionalidad":"Costarricense","lugarResidencia":"Heredia","historial":"Se ha registrado al paciente en el sistema. Fecha:2021-11-17\n","usuario":"mreveiz","contrasenha":"123","cedula":"117680133","nombre":"Marco Reveiz"}]
+[
+  {
+    "fechaNacimiento": "18 nov. 2021 19:17:25",
+    "tipoSangre": "B-",
+    "nacionalidad": "Costarricense",
+    "lugarResidencia": "Heredia",
+    "numerosTelefonicos": [
+      "85769188"
+    ],
+    "vacunasAplicadas": [
+      {
+        "numLote": 0
+      }
+    ],
+    "historial": "Se ha registrado al paciente en el sistema. Fecha:2021-11-18\n",
+    "usuario": "mreveiz",
+    "contrasenha": "123",
+    "cedula": "117680133",
+    "nombre": "Marco Reveiz"
+  }
+]

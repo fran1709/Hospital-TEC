@@ -14,19 +14,22 @@ public class Main {
         Controlador controlador = new Controlador();
 
         JsonManager jsonManager = new JsonManager();
-
+/*
         ArrayList<String> especialidades = new ArrayList<>();
-        /*
+        ArrayList<String> numeros = new ArrayList<>();
         especialidades.add("Ginecologia");
         especialidades.add("Pediatria");
+        numeros.add("85769188");
+        ArrayList<Vacuna> vacunas = new ArrayList<>();
+        Vacuna vacuna = new Vacuna();
+        vacunas.add(vacuna);
         Date date = new Date();
         controlador.registrarCentroDeAtencion(1,120,"Hospital TEC","Heredia","Hospital");
         controlador.registrarDoctor("drMendez","123","Eduardo Mendez", "4578123565", 1, especialidades,date,1);
         controlador.registrarEnfermero("Pedro Mendez","123","peMendez", "4578123565", true,true,date,1);
         controlador.registrarPaciente("mreveiz","123","Marco Reveiz","117680133",date,"B-",
-                "Costarricense","Heredia",null,null);
+                "Costarricense","Heredia", numeros,vacunas);
         controlador.registrarSecretaria("sonia1","123","Sonia Perez","1234556",date,1);
-
         jsonManager.setUsuarios(controlador.getUsuarios());
         controlador.getListasUsuarios();
         jsonManager.setPacientes(controlador.getPacientes());

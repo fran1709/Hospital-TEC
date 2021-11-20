@@ -1,15 +1,16 @@
 package directory.gui;
 
+import directory.clases.*;
 import directory.clases.Doctor;
 import directory.clases.Enfermero;
-import directory.clases.Secretaria;
-import directory.clases.Usuario;
+import directory.clases.Paciente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -62,6 +63,7 @@ public class LogIn extends JFrame{
               tfContrasenhia.setText(null);
           }
           else {
+
               // Validar el tipo de credenciales .
 
               // Usuarios prueba
@@ -69,7 +71,7 @@ public class LogIn extends JFrame{
               ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
               // usuario doctor
               ArrayList<String> especial = new ArrayList<String>();
-              LocalDate fecha = LocalDate.now();
+              Date fecha = new Date();
               Doctor one = new Doctor("fran17", "123", "Francisco Javier", "207710202",
                                       1709,especial, fecha);
               usuarios.add(one);
@@ -81,6 +83,13 @@ public class LogIn extends JFrame{
               Secretaria secre = new Secretaria("ana21","123","Ana Ruth","207710203",
                       fecha);
               usuarios.add(secre);
+              // usuario paciente
+              ArrayList<String> numeros = new ArrayList<String>();
+              ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+              Paciente keilor = new Paciente("keilor","123","Keilor Rojas","207710204",
+                                             fecha,"A+","Costarricense", "Santa Rosa",
+                                             numeros,vacunas);
+              usuarios.add(keilor);
               // Fin usuarios prueba
 
               // necesario cambiar el ArrayList -> usuarios por la que almacena todos los que serán creados.
@@ -110,7 +119,8 @@ public class LogIn extends JFrame{
                   else {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                       setVisible(false);
-                      // Falta agregar pascienteAcc
+                      PacientAcc pacient = new PacientAcc();
+                      pacient.setVisible(true);
                   }
                 }
               }

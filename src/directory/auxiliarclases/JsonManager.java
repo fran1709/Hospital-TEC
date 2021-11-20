@@ -99,15 +99,12 @@ public class JsonManager {
         // Objecto Gson
         Gson gson = new Gson();
         // Path
-
-        // Usuarios
         String path = System.getProperty("user.dir") + "\\src\\directory\\jsons\\";
-        /**
+        // Usuarios
         String listaUsuarios = Files.readString(Paths.get(path+"usuarios.json"));
         Type usuariosALType = new TypeToken<ArrayList<Usuario>>(){}.getType();
         ArrayList<Usuario> usuariosArrayList = gson.fromJson(listaUsuarios,usuariosALType);
         this.setUsuarios(usuariosArrayList);
-         */
         // Pacientes
         String listaPacientes = Files.readString(Paths.get(path+"pacientes.json"));
         Type pacienteALType = new TypeToken<ArrayList<Paciente>>(){}.getType();
@@ -128,7 +125,6 @@ public class JsonManager {
         Type secALType = new TypeToken<ArrayList<Secretaria>>(){}.getType();
         ArrayList<Secretaria> secArrayList = gson.fromJson(listaSecretarios,secALType);
         this.setSecretarios(secArrayList);
-
 
     }
 

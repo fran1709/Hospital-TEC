@@ -9,6 +9,9 @@ import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Francisco Ovares Rojas
+ */
 public class Paciente extends JFrame{
   private JPanel pacienteWindow;
   private JLabel jlTitle;
@@ -20,7 +23,7 @@ public class Paciente extends JFrame{
   private JLabel jlResidencia;
   private JLabel jlTelefono;
   private JLabel jlCelular;
-    private JTextField tfCedula;
+  private JTextField tfCedula;
   private JTextField tfName;
   private JTextField tfResidencia;
   private JTextField tfTelefono;

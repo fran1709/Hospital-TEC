@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Paciente extends Usuario{
   //Atributos
-  private LocalDate fechaNacimiento;
+  private Date fechaNacimiento;
   private String tipoSangre;
   private String nacionalidad;
   private String lugarResidencia;
@@ -33,7 +33,7 @@ public class Paciente extends Usuario{
    * @param numerosTelefonicos
    * @param vacunasAplicadas
    */
-  public Paciente(String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaNacimiento, String tipoSangre,
+  public Paciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
                   String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas) {
     this.fechaNacimiento = fechaNacimiento;
     this.tipoSangre = tipoSangre;
@@ -47,6 +47,7 @@ public class Paciente extends Usuario{
     this.setCedula(cedula);
     this.historial = "Se ha registrado al paciente en el sistema. Fecha:" + LocalDate.now() + "\n";
   }
+  public void Paciente(){}
 
   /* FUNCIONALIDADES DEL PACIENTE */
 
@@ -221,10 +222,10 @@ public class Paciente extends Usuario{
   }
 
   // Metodos accesores.
-  public LocalDate getFechaNacimiento() {
+  public Date getFechaNacimiento() {
     return fechaNacimiento;
   }
-  public void setFechaNacimiento(LocalDate fechaNacimiento) {
+  public void setFechaNacimiento(Date fechaNacimiento) {
     this.fechaNacimiento = fechaNacimiento;
   }
   public String getTipoSangre() {

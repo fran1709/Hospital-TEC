@@ -65,4 +65,9 @@ public class CentroAtencion {
   public String getTipo() {
     return this.tipo;
   }
+
+  @Override
+  public String toString(){
+    return getNombre();
+  }
 }

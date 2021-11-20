@@ -1,26 +1,30 @@
 package directory.clases;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Vacuna {
   //Atributos
-  private LocalDate fechaAplicacion;
+  private Date fechaAplicacion;
   private String nombreVacuna;
   private String farmaceutica;
   private int numLote;
 
-  /**
-   * Constructor de la clase.
-   */
-  public Vacuna() {
-    ;
+
+
+  public Vacuna(Date fechaAplicacion, String nombreVacuna, String farmaceutica, int numLote) {
+    this.fechaAplicacion = fechaAplicacion;
+    this.nombreVacuna = nombreVacuna;
+    this.farmaceutica = farmaceutica;
+    this.numLote = numLote;
   }
 
+
   // Metodos accesores.
-  public LocalDate getFechaAplicacion() {
+  public Date getFechaAplicacion() {
     return fechaAplicacion;
   }
-  public void setFechaAplicacion(LocalDate fechaAplicacion) {
+  public void setFechaAplicacion(Date fechaAplicacion) {
     this.fechaAplicacion = fechaAplicacion;
   }
   public String getNombreVacuna() {

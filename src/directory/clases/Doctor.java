@@ -58,7 +58,7 @@ public class Doctor extends FuncionarioMedicina{
    * @param paciente
    */
   public void aplicarVacuna(Paciente paciente) {
-    Vacuna vacuna = new Vacuna();
+    //Vacuna vacuna = new Vacuna();
   }
 
 
@@ -74,5 +74,17 @@ public class Doctor extends FuncionarioMedicina{
   }
   public void setEspecialidades(ArrayList<String> especialidades) {
     this.especialidades = especialidades;
+  }
+
+  @Override
+  public String toString() {
+    return "Doctor{" + "\n"+
+            "Nombre: " + getNombre() + "\n"+
+            "Codigo Medico: " + String.valueOf(getCodigoMedico()) + "\n"+
+            "Cedula: " + getCedula() + "\n"+
+            "Usuario: " + getUsuario() + "\n"+
+            "Contraseña: " + getContrasenha() + "\n"+
+            "especialidades=" + especialidades + "\n"+
+            '}';
   }
 }

@@ -14,15 +14,13 @@ public class Main {
         Controlador controlador = new Controlador();
 
         JsonManager jsonManager = new JsonManager();
-/*
+
         ArrayList<String> especialidades = new ArrayList<>();
         ArrayList<String> numeros = new ArrayList<>();
         especialidades.add("Ginecologia");
         especialidades.add("Pediatria");
         numeros.add("85769188");
         ArrayList<Vacuna> vacunas = new ArrayList<>();
-        Vacuna vacuna = new Vacuna();
-        vacunas.add(vacuna);
         Date date = new Date();
         controlador.registrarCentroDeAtencion(1,120,"Hospital TEC","Heredia","Hospital");
         controlador.registrarDoctor("drMendez","123","Eduardo Mendez", "4578123565", 1, especialidades,date,1);
@@ -38,12 +36,13 @@ public class Main {
         jsonManager.setEnfermeros(controlador.getEnfermeros());
         jsonManager.setSecretarios(controlador.getSecretarios());
         jsonManager.setJsons();
-        */
+
+        /**
         jsonManager.getJsons();
         controlador.setDoctores(jsonManager.getDoctors());
         System.out.println(jsonManager.getDoctors().get(0));
 
-
+*/
 
 
 

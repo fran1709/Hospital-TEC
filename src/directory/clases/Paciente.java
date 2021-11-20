@@ -41,6 +41,7 @@ public class Paciente extends Usuario{
     this.lugarResidencia = lugarResidencia;
     this.numerosTelefonicos = numerosTelefonicos;
     this.vacunasAplicadas = vacunasAplicadas;
+    this.citas = new ArrayList<>();
     this.setUsuario(usuario);
     this.setContrasenha(contrasehna);
     this.setNombre(nombre);
@@ -282,5 +283,20 @@ public class Paciente extends Usuario{
     this.tratamientos = tratamientos;
   }
 
+  @Override
+  public String toString() {
+    return "Paciente{" + "\n"+
+            "Nombre: " + getNombre() + "\n"+
+            "Fecha Nacimiento: " + getFechaNacimiento() + "\n"+
+            "Cedula: " + getCedula() + "\n"+
+            "Usuario: " + getUsuario() + "\n"+
+            "Contraseña: " + getContrasenha() + "\n"+
+            "Lugar de Residencia: " + getLugarResidencia() + "\n"+
+            "Nacionalidad: " + getNacionalidad() + "\n"+
+            "Tipo de Sangre: " + getTipoSangre() + "\n"+
+            "Numeros Telefonicos: " + getNumerosTelefonicos() + "\n"+
+            "Vacunas=" + getVacunasAplicadas() + "\n"+
+            '}';
+  }
 
 }

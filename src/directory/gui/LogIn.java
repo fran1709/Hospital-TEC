@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -62,6 +63,7 @@ public class LogIn extends JFrame{
               tfContrasenhia.setText(null);
           }
           else {
+
               // Validar el tipo de credenciales .
 
               // Usuarios prueba
@@ -69,7 +71,7 @@ public class LogIn extends JFrame{
               ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
               // usuario doctor
               ArrayList<String> especial = new ArrayList<String>();
-              LocalDate fecha = LocalDate.now();
+              Date fecha = new Date();
               Doctor one = new Doctor("fran17", "123", "Francisco Javier", "207710202",
                                       1709,especial, fecha);
               usuarios.add(one);

@@ -79,7 +79,7 @@ public class Controlador {
      * @param numerosTelefonicos
      * @param vacunasAplicadas
      */
-    public void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaNacimiento, String tipoSangre,
+    public void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
                                   String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
@@ -112,9 +112,10 @@ public class Controlador {
      * @param cedula
      * @param codigoMedico
      * @param especialidades
+     * @param fechaDeIngreso
      */
     public void registrarDoctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico,
-                                 ArrayList<String> especialidades, LocalDate fechaDeIngreso, int codigoCentro){
+                                 ArrayList<String> especialidades, Date fechaDeIngreso, int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Doctor newDoctor = new Doctor(usuario, contrasehna, nombre, cedula, codigoMedico, especialidades, fechaDeIngreso);
@@ -144,15 +145,16 @@ public class Controlador {
 
     /**
      * Metodo para registrar enfermero
+     * @param nombre
      * @param usuario
      * @param contrasehna
-     * @param nombre
      * @param cedula
      * @param dirigioPersonas
      * @param expeCapacitando
+     * @param fechaDeIngreso
      */
     public void registrarEnfermero (String nombre, String usuario, String contrasehna, String cedula, boolean dirigioPersonas,
-                                    boolean expeCapacitando, LocalDate fechaDeIngreso, int codigoCentro){
+                                    boolean expeCapacitando, Date fechaDeIngreso, int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Enfermero newEnfermero = new Enfermero(usuario, contrasehna, nombre, cedula, dirigioPersonas, expeCapacitando, fechaDeIngreso);
@@ -187,8 +189,9 @@ public class Controlador {
      * @param contrasehna
      * @param nombre
      * @param cedula
+     * @param fechaDeIngreso
      */
-    public void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, LocalDate fechaDeIngreso , int codigoCentro){
+    public void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, Date fechaDeIngreso , int codigoCentro){
         if (this.usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Secretaria newSecretaria = new Secretaria(usuario, contrasehna, nombre, cedula, fechaDeIngreso);

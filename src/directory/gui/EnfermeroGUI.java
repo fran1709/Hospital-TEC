@@ -1,15 +1,19 @@
 package directory.gui;
 
+import directory.clases.CentroAtencion;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * @author Francisco Ovares Rojas
  */
-public class Enfermero extends JFrame {
+public class EnfermeroGUI extends JFrame {
   private JPanel enfermeroWindow;
   private JLabel jlCedula;
   private JLabel jlNombre;
@@ -20,8 +24,12 @@ public class Enfermero extends JFrame {
   private JComboBox comboBoxArea;
   private JComboBox cbLideradoPersonas;
   private JComboBox cbExpCapacitando;
+  private JTextField textFieldContra;
+  private JTextField textFieldUsuario;
+    private JComboBox comboBoxCentro;
+    private JTextField textFieldCodigoMedico;
 
-  public Enfermero() {
+    public EnfermeroGUI() {
     // Atributos.
     setContentPane(enfermeroWindow);
     setTitle("Hospital TEC");
@@ -29,6 +37,21 @@ public class Enfermero extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+    comboBoxCentro.setModel(new DefaultComboBoxModel(Controlador.centrosDeAtencion.toArray(new CentroAtencion[0])));
+
+    cbExpCapacitando.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cbExpCapacitando.getSelectedItem().toString();
+        }
+    });
+
+    cbLideradoPersonas.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cbLideradoPersonas.getSelectedItem().toString();
+        }
+    });
 
     volverButton.addActionListener(new ActionListener() {
       /**
@@ -50,7 +73,7 @@ public class Enfermero extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
           // Validación de campos vacíos
-          if (textFieldName.getText().length() <= 2 || textFieldCedula.getText().length() <= 2) {
+          if (textFieldName.getText().isEmpty()|| textFieldCedula.getText().isEmpty()) {
               JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
               textFieldCedula.setText(null);
               textFieldName.setText(null);
@@ -64,21 +87,24 @@ public class Enfermero extends JFrame {
               // Atributos del nuevo objeto.
               String nombre = textFieldName.getText();
               String cedula = textFieldCedula.getText();
-              String area = (String) comboBoxArea.getSelectedItem();
-              LocalDate fecha = LocalDate.now();
+              String usuario = textFieldUsuario.getText();
+              String contrasehna = textFieldContra.getText();
+              CentroAtencion centroAtencion = (CentroAtencion) comboBoxCentro.getSelectedItem();
+              Date fecha = new Date();
               String cbExpe = (String) cbExpCapacitando.getSelectedItem();
               boolean expCapacitando = false;
               String lidero = (String) cbLideradoPersonas.getSelectedItem();
               boolean dirigePersonas = false;
-              if (cbExpe.compareTo("Si") == 0) {
+              if (cbExpe.equals("Si")) {
                   expCapacitando = true;
               }
-              if (lidero.compareTo("Si") == 0) {
+              if (lidero.equals("Si")) {
                   dirigePersonas = true;
               }
               //System.out.println(dirigePersonas);
 
               // Controlador para crear Enfermero(a).
+              Controlador.registrarEnfermero(nombre,usuario,contrasehna,cedula,dirigePersonas,expCapacitando,fecha,centroAtencion.getCodigo());
           }
       }
     });

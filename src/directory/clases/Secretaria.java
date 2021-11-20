@@ -53,8 +53,8 @@ public class Secretaria extends Funcionario{
      * @param comentario
      * @param identificador
      */
-    public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador) {
-        Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador);
+    public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador, int hora) {
+        Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador, hora);
         pCita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha asignado la cita a nombre del funcionario " + this.getNombre());
         paciente.getCitas().add(pCita);
         paciente.actualizarHistorial("Se ha asignado la cita ID: " + pCita.getIdentificador() +" a nombre del funcionario " + this.getNombre());
@@ -135,4 +135,13 @@ public class Secretaria extends Funcionario{
         return msg;
     }
 
+    @Override
+    public String toString() {
+        return "Secretaria{" + "\n"+
+                "Nombre: " + getNombre() + "\n"+
+                "Cedula: " + getCedula() + "\n"+
+                "Usuario: " + getUsuario() + "\n"+
+                "Contraseña: " + getContrasenha() + "\n"+
+                '}';
+    }
 }

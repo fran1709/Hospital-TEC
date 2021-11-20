@@ -12,6 +12,7 @@ public class Cita {
   private String especialidad;
   private Date fechaCita;
   private String comentario;
+  private int hora;
   private int identificador;
   private String estadoCita;
   private String bitacora;
@@ -24,13 +25,15 @@ public class Cita {
    * @param comentario comentario de razon de la cita
    * @param identificador id de la cita
    */
-  public Cita (String especialidad, Date fechaCita, String comentario, int identificador) {
+  public Cita (String especialidad, Date fechaCita, String comentario, int identificador, int hora) {
     this.especialidad = especialidad;
     this.fechaCita = fechaCita;
     this.comentario = comentario;
     this.identificador = identificador;
     this.bitacora = "Se ha registrado la cita\n";
     this.estadoCita = "Registrada";
+    this.diagnosticos = new ArrayList<>();
+    this.hora = hora;
   }
 
   /**
@@ -101,5 +104,23 @@ public class Cita {
 
   public void setDiagnosticos(ArrayList<Diagnostico> diagnosticos) {
     this.diagnosticos = diagnosticos;
+  }
+
+  @Override
+  public String toString() {
+    /*
+    "Cita{" +'\n' +
+          "especialidad= " + especialidad + '\n' +
+          "fechaCita= " + fechaCita + '\n' +
+          "comentario= " + comentario + '\n' +
+          "identificador= " + identificador +
+          "estadoCita= " + estadoCita + '\n' +
+          "bitacora= '" + bitacora + '\n' +
+          "hora = " + hora + '\n' +
+          "diagnosticos= " + diagnosticos +
+          '}';
+          */
+
+    return "Cita " + String.valueOf(getIdentificador());
   }
 }

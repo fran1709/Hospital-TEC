@@ -1,10 +1,16 @@
 package directory.gui;
 
+import directory.clases.Vacuna;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
@@ -12,7 +18,7 @@ import static java.lang.Integer.parseInt;
 /**
  * @author Francisco Ovares Rojas
  */
-public class Paciente extends JFrame{
+public class PacienteGUI extends JFrame {
   private JPanel pacienteWindow;
   private JLabel jlTitle;
   private JLabel jlNombre;
@@ -35,16 +41,26 @@ public class Paciente extends JFrame{
   private JComboBox cbYear;
   private JComboBox cbMonth;
   private JComboBox cbDay;
+  private JTextField tfUsuario;
+  private JTextField tfContra;
+  private JComboBox anhoVacuna;
+  private JComboBox mesVacuna;
+  private JComboBox diaVacuna;
+  private JTextField tfFarmaceutica;
+  private JTextField tfNombreVacuna;
+  private JButton agregarVacunaButton;
+  private JTextField tfLote;
 
-  public Paciente() {
+  public PacienteGUI() {
     // Atributos.
     setContentPane(pacienteWindow);
     setTitle("Hospital TEC");
-    setSize(600,400);
+    setSize(800, 700);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+    ArrayList<Vacuna> vacunas = new ArrayList<>();
 
     volverButton.addActionListener(new ActionListener() {
       /**
@@ -59,6 +75,25 @@ public class Paciente extends JFrame{
       }
     });
 
+    agregarVacunaButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Date fechaVacuna = null;
+        String farmaceutica = tfFarmaceutica.getText();
+        String nombreVacuna = tfNombreVacuna.getText();
+        String idLote = tfLote.getText();
+        try {
+          SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+          fechaVacuna = formatter.parse(anhoVacuna.getSelectedItem().toString()+"-"+mesVacuna.getSelectedItem().toString()+ "-" +diaVacuna.getSelectedItem().toString());
+        } catch (ParseException ex) {
+          ex.printStackTrace();
+        }
+        Vacuna vacuna = new Vacuna(fechaVacuna,nombreVacuna,farmaceutica,Integer.parseInt(idLote));
+        vacunas.add(vacuna);
+        JOptionPane.showMessageDialog(null,"Vacuna agregada!");
+      }
+    });
+
     registrarButton.addActionListener(new ActionListener() {
       /**
        * Registra un nuevo Paciente.
@@ -68,8 +103,8 @@ public class Paciente extends JFrame{
       public void actionPerformed(ActionEvent e) {
         // Validación de campos vacíos
         if (tfName.getText().length() <= 2 || tfCedula.getText().length() <= 2 || tfTelefono.getText().length() <= 2 ||
-            tfCelular.getText().length() <= 2 || tfResidencia.getText().length() <= 2) {
-          JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
+                tfCelular.getText().length() <= 2 || tfResidencia.getText().length() <= 2) {
+          JOptionPane.showMessageDialog(null, "Ingrese datos válidos!");
           tfCedula.setText(null);
           tfName.setText(null);
           cbYear.setSelectedIndex(0);
@@ -79,25 +114,35 @@ public class Paciente extends JFrame{
           cbTipoSangre.setSelectedIndex(0);
           tfCelular.setText(null);
           tfTelefono.setText(null);
+
         }
         // El tipo de funcionario se codifica manualmente.
         // La fecha se obtiene con LocalDate.now().
+
         else {
+
           // Atributos del nuevo objeto.
           String nombre = tfName.getText();
           String cedula = tfCedula.getText();
-          String area = (String) cbNacionalidad.getSelectedItem();
-          LocalDate fecha = LocalDate.of(parseInt(cbYear.getSelectedItem().toString()),
-                                         parseInt(cbMonth.getSelectedItem().toString()),
-                                         parseInt(cbDay.getSelectedItem().toString()));
+          String usuario = (String) tfUsuario.getText();
+          String contrasehna = (String) tfContra.getText();
+          SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+          Date fecha = null;
+
+          try {
+            fecha = formatter.parse(cbDay.getSelectedItem().toString()+"-"+cbMonth.getSelectedItem().toString()+ "-" +cbYear.getSelectedItem().toString());
+          } catch (ParseException ex) {
+            ex.printStackTrace();
+          }
           String tipoSangre = (String) cbTipoSangre.getSelectedItem();
           String nacionalidad = (String) cbNacionalidad.getSelectedItem();
           ArrayList<String> numeros = new ArrayList<String>();
           numeros.add(tfCelular.getText());
           numeros.add(tfTelefono.getText());
           String residencia = tfResidencia.getText();
-          /* Falta definir como obtener las vacunas */
+
           // Controlador para crear Paciente.
+          Controlador.registrarPaciente(usuario,contrasehna,nombre,cedula,fecha,tipoSangre,nacionalidad,residencia,numeros,vacunas);
         }
       }
     });

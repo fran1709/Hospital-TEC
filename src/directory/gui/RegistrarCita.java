@@ -1,8 +1,15 @@
 package directory.gui;
 
+import directory.clases.Cita;
+import directory.clases.Paciente;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -15,7 +22,7 @@ public class RegistrarCita extends JFrame {
   private JTextField tfMes;
   private JTextField tfDia;
   private JComboBox cbHora;
-    private JComboBox cbEspecialidades;
+  private JComboBox cbEspecialidades;
   private JTextField tfObervation;
   private JButton asignarButton;
 
@@ -48,12 +55,27 @@ public class RegistrarCita extends JFrame {
        */
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (tfAnhio.getText().length() <= 2 || tfDia.getText().length() <= 2 || tfMes.getText().length() <= 2 ||
-            tfObervation.getText().length() <= 2) {
+        if (tfAnhio.getText().isEmpty() || tfDia.getText().isEmpty() || tfMes.getText().isEmpty() ||
+            tfObervation.getText().isEmpty()) {
           JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
         }
         else {
+          Date fecha = null;
+          try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            fecha = formatter.parse(tfAnhio.getText()+"-"+tfMes.getText()+ "-" +tfDia.getText());
+          } catch (ParseException ex) {
+            ex.printStackTrace();
+          }
           // Asignar cita al usuario respectivo.
+          Paciente paciente = (Paciente) Controlador.usuario;
+          Controlador.idCita = Controlador.idCita+1;
+          Cita newCita = new Cita(cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
+          paciente.getCitas().add(newCita);
+          for (Cita pCita : paciente.getCitas()) {
+            System.out.println(pCita.toString());
+          }
+
         }
       }
     });

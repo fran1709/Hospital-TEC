@@ -47,7 +47,7 @@ public class Registrar extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        Doctor newDoc = new Doctor();
+        DoctorGUI newDoc = new DoctorGUI();
         newDoc.setVisible(true);
       }
     });
@@ -60,7 +60,7 @@ public class Registrar extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        Enfermero newNurse = new Enfermero();
+        EnfermeroGUI newNurse = new EnfermeroGUI();
         newNurse.setVisible(true);
       }
     });
@@ -73,7 +73,7 @@ public class Registrar extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        Secretario nuevoSecre = new Secretario();
+        SecretarioGUI nuevoSecre = new SecretarioGUI();
         nuevoSecre.setVisible(true);
       }
     });
@@ -86,7 +86,7 @@ public class Registrar extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        Paciente newPacient = new Paciente();
+        PacienteGUI newPacient = new PacienteGUI();
         newPacient.setVisible(true);
       }
     });

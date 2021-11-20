@@ -34,8 +34,8 @@ public class FuncionarioMedicina extends Funcionario{
      * Metodo para que un funcionario de medicina asigne una cita
      * @param paciente
      */
-    public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador){
-        Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador);
+    public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador, int hora){
+        Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador, hora);
         pCita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha asignado la cita a nombre del funcionario de medicina " + this.getNombre());
         paciente.getCitas().add(pCita);
         paciente.actualizarHistorial("Se ha asignado la cita ID: " + pCita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());

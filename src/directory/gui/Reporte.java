@@ -23,7 +23,7 @@ public class Reporte extends JFrame{
     // Atributos.
     setContentPane(ReportesWindow);
     setTitle("Hospital TEC");
-    setSize(650,600);
+    setSize(650,800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());

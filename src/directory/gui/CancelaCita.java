@@ -1,8 +1,14 @@
 package directory.gui;
 
+import directory.clases.CentroAtencion;
+import directory.clases.Cita;
+import directory.clases.Paciente;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -18,10 +24,14 @@ public class CancelaCita extends JFrame{
     // Atributos.
     setContentPane(CancelaCitaWindow);
     setTitle("Hospital TEC");
-    setSize(450,300);
+    setSize(450,350);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+    Paciente paciente = (Paciente) Controlador.usuario;
+    ArrayList<Cita> citas = paciente.getCitas();
+    cbCitas.setModel(new DefaultComboBoxModel(citas.toArray()));
+
 
     volverButton.addActionListener(new ActionListener() {
       /**

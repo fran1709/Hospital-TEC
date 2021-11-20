@@ -31,7 +31,17 @@ public class Enfermero extends FuncionarioMedicina{
     this.setFechaIngreso(localDate);
   }
 
-
+  @Override
+  public String toString() {
+    return "Enfermero{" + "\n"+
+            "Nombre: " + getNombre() + "\n"+
+            "Experiencia: " + getExpeCapacitando() + "\n"+
+            "Cedula: " + getCedula() + "\n"+
+            "Usuario: " + getUsuario() + "\n"+
+            "Contraseña: " + getContrasenha() + "\n"+
+            "Dirigio Personas =" + getDirigioPersonas() + "\n"+
+            '}';
+  }
 
   //Metodos accesores
   public boolean isDirigioPersonas() {
@@ -45,5 +55,11 @@ public class Enfermero extends FuncionarioMedicina{
   }
   public void setExpeCapacitando(boolean pExpeCapacitando) {
     this.expeCapacitando = pExpeCapacitando;
+  }
+  public Boolean getExpeCapacitando() {
+    return this.expeCapacitando ;
+  }
+  public Boolean getDirigioPersonas() {
+    return this.expeCapacitando ;
   }
 }

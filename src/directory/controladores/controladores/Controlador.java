@@ -13,52 +13,31 @@ import java.util.Date;
 public class Controlador {
 
 
-    private ArrayList<Usuario> usuarios;
-    private ArrayList<CentroAtencion> centrosDeAtencion;
-    private ArrayList<Paciente> pacientes;
-    private ArrayList<Secretaria> secretarios;
-    private ArrayList<Doctor> doctores;
-    private ArrayList<Enfermero> enfermeros;
+    public static ArrayList<Usuario> usuarios = new ArrayList<>();;
+    public static ArrayList<CentroAtencion> centrosDeAtencion = new ArrayList<>();;
+    public static ArrayList<Paciente> pacientes = new ArrayList<>();;
+    public static ArrayList<Secretaria> secretarios = new ArrayList<>();;
+    public static ArrayList<Doctor> doctores = new ArrayList<>();;
+    public static ArrayList<Enfermero> enfermeros = new ArrayList<>();;
     public static String usuarioEnSesion;
     public static String contrasehna;
+    public static Usuario usuario;
+    public static int idCita = 0;
 
     /**
      * METODO CONSTRUCTOR
      */
-    public Controlador() {
-        this.usuarios = new ArrayList<>();
-        this.centrosDeAtencion = new ArrayList<>();
-        this.pacientes = new ArrayList<>();
-        this.secretarios = new ArrayList<>();
-        this.doctores = new ArrayList<>();
-        this.enfermeros = new ArrayList<>();
-    }
+    public Controlador() {}
 
     /** METODOS DE VALIDACION DE USUARIOS **/
-    /**
-     * Metodo para ingresar al sistema
-     * @param usuarioEnSesion nombre de usuario
-     * @param contrasehna contrasehna del usuario
-     */
-    public void iniciarSesion (String usuarioEnSesion, String contrasehna) {
-
-        for (Usuario usuario : this.usuarios) {
-            if (usuario.getUsuario().equals(usuarioEnSesion) & usuario.getContrasenha().equals(contrasehna)) {
-                this.usuarioEnSesion = usuarioEnSesion;
-                this.contrasehna = contrasehna;
-                break;
-            }
-        }
-        System.out.println("El usuario es inexistente");
-    }
 
     /**
      * Verifica si el usuario ya existe
      * @param usuarioEnSesion nombre del usuario
      * @return Si es true exite, si no no existe
      */
-    public boolean buscaUsuario (String usuarioEnSesion){
-        for (Usuario usuario : this.usuarios) {
+    public static boolean buscaUsuario (String usuarioEnSesion){
+        for (Usuario usuario : usuarios) {
             if (usuario.getUsuario().equals(usuarioEnSesion)) {
                 return true;
             }
@@ -79,23 +58,26 @@ public class Controlador {
      * @param numerosTelefonicos
      * @param vacunasAplicadas
      */
-    public void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
+    public static void registrarPaciente(String usuario, String contrasehna, String nombre, String cedula, Date fechaNacimiento, String tipoSangre,
                                   String nacionalidad, String lugarResidencia, ArrayList<String> numerosTelefonicos, ArrayList<Vacuna> vacunasAplicadas){
-        if (this.usuarios.isEmpty()) {
+
+        if (usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Paciente newPaciente = new Paciente(usuario, contrasehna, nombre, cedula, fechaNacimiento, tipoSangre,
                     nacionalidad, lugarResidencia, numerosTelefonicos, vacunasAplicadas);
+            System.out.println(newPaciente.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newPaciente);
+            usuarios.add(newPaciente);
             System.out.println("El usuario agregado");
         }else {
             // Verifica si el usuario ya existe
-            if (!this.buscaUsuario(usuario)) {
+            if (!buscaUsuario(usuario)) {
                 // Primero debe verificar si la cedula existe
                 Paciente newPaciente = new Paciente(usuario, contrasehna, nombre, cedula, fechaNacimiento, tipoSangre,
                         nacionalidad, lugarResidencia, numerosTelefonicos, vacunasAplicadas);
+                System.out.println(newPaciente.toString());
                 // Si cumple con los requisitos se agrega
-                this.usuarios.add(newPaciente);
+                usuarios.add(newPaciente);
                 System.out.println("El usuario agregado");
             }
         }
@@ -114,26 +96,29 @@ public class Controlador {
      * @param especialidades
      * @param fechaDeIngreso
      */
-    public void registrarDoctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico,
+    public static void registrarDoctor (String usuario, String contrasehna, String nombre, String cedula, int codigoMedico,
                                  ArrayList<String> especialidades, Date fechaDeIngreso, int codigoCentro){
-        if (this.usuarios.isEmpty()) {
+        if (usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Doctor newDoctor = new Doctor(usuario, contrasehna, nombre, cedula, codigoMedico, especialidades, fechaDeIngreso);
+            System.out.println(newDoctor.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newDoctor);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+            usuarios.add(newDoctor);
+            for (CentroAtencion centro :centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newDoctor);
                     System.out.println("El usuario agregado");
                 }
             }
         }
-        if (!this.buscaUsuario(usuario)) {
+        if (!buscaUsuario(usuario)) {
+            System.out.println("Entra");
             // Primero debe verificar si la cedula existe
             Doctor newDoctor = new Doctor(usuario, contrasehna, nombre, cedula, codigoMedico, especialidades, fechaDeIngreso);
+            System.out.println(newDoctor.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newDoctor);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+           usuarios.add(newDoctor);
+            for (CentroAtencion centro : centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newDoctor);
                     System.out.println("El usuario agregado");
@@ -153,26 +138,28 @@ public class Controlador {
      * @param expeCapacitando
      * @param fechaDeIngreso
      */
-    public void registrarEnfermero (String nombre, String usuario, String contrasehna, String cedula, boolean dirigioPersonas,
+    public static void registrarEnfermero (String nombre, String usuario, String contrasehna, String cedula, boolean dirigioPersonas,
                                     boolean expeCapacitando, Date fechaDeIngreso, int codigoCentro){
-        if (this.usuarios.isEmpty()) {
+        if (usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Enfermero newEnfermero = new Enfermero(usuario, contrasehna, nombre, cedula, dirigioPersonas, expeCapacitando, fechaDeIngreso);
+            System.out.println(newEnfermero.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newEnfermero);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+            usuarios.add(newEnfermero);
+            for (CentroAtencion centro : centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newEnfermero);
                     System.out.println("El usuario agregado");
                 }
             }
         }
-        if (!this.buscaUsuario(usuario)) {
+        if (!buscaUsuario(usuario)) {
             // Primero debe verificar si la cedula existe
             Enfermero newEnfermero = new Enfermero(usuario, contrasehna, nombre, cedula, dirigioPersonas, expeCapacitando, fechaDeIngreso);
+            System.out.println(newEnfermero.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newEnfermero);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+            usuarios.add(newEnfermero);
+            for (CentroAtencion centro : centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newEnfermero);
                     System.out.println("El usuario agregado");
@@ -191,13 +178,14 @@ public class Controlador {
      * @param cedula
      * @param fechaDeIngreso
      */
-    public void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, Date fechaDeIngreso , int codigoCentro){
-        if (this.usuarios.isEmpty()) {
+    public static void registrarSecretaria (String usuario, String contrasehna, String nombre, String cedula, Date fechaDeIngreso , int codigoCentro){
+        if (usuarios.isEmpty()) {
             // Primero debe verificar si la cedula existe
             Secretaria newSecretaria = new Secretaria(usuario, contrasehna, nombre, cedula, fechaDeIngreso);
+            System.out.println(newSecretaria.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newSecretaria);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+            usuarios.add(newSecretaria);
+            for (CentroAtencion centro :centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newSecretaria);
                     System.out.println("El usuario agregado");
@@ -205,12 +193,13 @@ public class Controlador {
                 }
             }
         }
-        if (!this.buscaUsuario(usuario)) {
+        if (!buscaUsuario(usuario)) {
             // Primero debe verificar si la cedula existe
             Secretaria newSecretaria = new Secretaria(usuario, contrasehna, nombre, cedula, fechaDeIngreso);
+            System.out.println(newSecretaria.toString());
             // Si cumple con los requisitos se agrega
-            this.usuarios.add(newSecretaria);
-            for (CentroAtencion centro : this.centrosDeAtencion) {
+            usuarios.add(newSecretaria);
+            for (CentroAtencion centro : centrosDeAtencion) {
                 if (centro.getCodigo() == codigoCentro) {
                     centro.agregarFuncionario(newSecretaria);
                     System.out.println("El usuario agregado");
@@ -261,9 +250,9 @@ public class Controlador {
      * @param lugarUbicacion
      * @param tipo
      */
-    public void registrarCentroDeAtencion(int codigo, int capacidadPacientes, String nombre, String lugarUbicacion, String tipo){
+    public static void registrarCentroDeAtencion(int codigo, int capacidadPacientes, String nombre, String lugarUbicacion, String tipo){
         CentroAtencion centroAtencion = new CentroAtencion(codigo,capacidadPacientes,nombre,lugarUbicacion,tipo);
-        this.centrosDeAtencion.add(centroAtencion);
+        centrosDeAtencion.add(centroAtencion);
     }
 
 

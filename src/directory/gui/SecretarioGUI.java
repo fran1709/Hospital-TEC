@@ -1,15 +1,19 @@
 package directory.gui;
 
+import directory.clases.CentroAtencion;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * @author Francisco Ovares Rojas
  */
-public class Secretario extends JFrame {
+public class SecretarioGUI extends JFrame {
   private JPanel secreWindow;
   private JLabel jlTitle;
   private JButton registrarButton;
@@ -19,8 +23,10 @@ public class Secretario extends JFrame {
     private JComboBox comboBoxArea;
     private JTextField textFieldName;
     private JTextField textFieldCedula;
+  private JTextField textFieldUsuario;
+  private JTextField textFieldContrasehna;
 
-    public Secretario() {
+  public SecretarioGUI() {
     // Atributos.
     setContentPane(secreWindow);
     setTitle("Hospital TEC");
@@ -28,6 +34,7 @@ public class Secretario extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+    comboBoxArea.setModel(new DefaultComboBoxModel(Controlador.centrosDeAtencion.toArray(new CentroAtencion[0])));
 
     volverButton.addActionListener(new ActionListener() {
       @Override
@@ -42,7 +49,7 @@ public class Secretario extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
         // Validación de campos vacíos
-        if (textFieldName.getText().length() <= 2 || textFieldCedula.getText().length() <= 2) {
+        if (textFieldName.getText().isEmpty()|| textFieldCedula.getText().isEmpty()) {
           JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
           textFieldCedula.setText(null);
           textFieldName.setText(null);
@@ -54,10 +61,12 @@ public class Secretario extends JFrame {
           // Atributos del nuevo objeto.
           String nombre = textFieldName.getText();
           String cedula = textFieldCedula.getText();
-          String area = (String) comboBoxArea.getSelectedItem();
-          LocalDate fecha = LocalDate.now();
-
+          CentroAtencion centroAtencion = (CentroAtencion) comboBoxArea.getSelectedItem();
+          String usuario = textFieldUsuario.getText();
+          String contra = textFieldContrasehna.getText();
+          Date fecha = new Date();
           // Controlador para crear Secretario(a).
+          Controlador.registrarSecretaria(usuario,contra,nombre,cedula,fecha,centroAtencion.getCodigo());
         }
       }
     });

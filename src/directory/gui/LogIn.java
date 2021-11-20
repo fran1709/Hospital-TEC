@@ -4,6 +4,7 @@ import directory.clases.*;
 import directory.clases.Doctor;
 import directory.clases.Enfermero;
 import directory.clases.Paciente;
+import directory.controladores.controladores.Controlador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ public class LogIn extends JFrame{
   private JLabel jlContra;
   private JLabel jlUser;
 
+
   public LogIn() {
     // Atributos.
     setContentPane(panel1);
@@ -35,6 +37,7 @@ public class LogIn extends JFrame{
     setVisible(true);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+
 
     volverButton.addActionListener(new ActionListener() {
       /**
@@ -67,33 +70,10 @@ public class LogIn extends JFrame{
               // Validar el tipo de credenciales .
 
               // Usuarios prueba
-              //lista de prueba
-              ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-              // usuario doctor
-              ArrayList<String> especial = new ArrayList<String>();
-              Date fecha = new Date();
-              Doctor one = new Doctor("fran17", "123", "Francisco Javier", "207710202",
-                                      1709,especial, fecha);
-              usuarios.add(one);
-              // usuario enfermero
-              Enfermero two = new Enfermero("sandra05", "123", "Sandra Piedra", "207710082",
-                      true, true,fecha);
-              usuarios.add(two);
-              // usuario secretario
-              Secretaria secre = new Secretaria("ana21","123","Ana Ruth","207710203",
-                      fecha);
-              usuarios.add(secre);
-              // usuario paciente
-              ArrayList<String> numeros = new ArrayList<String>();
-              ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
-              Paciente keilor = new Paciente("keilor","123","Keilor Rojas","207710204",
-                                             fecha,"A+","Costarricense", "Santa Rosa",
-                                             numeros,vacunas);
-              usuarios.add(keilor);
-              // Fin usuarios prueba
+
 
               // necesario cambiar el ArrayList -> usuarios por la que almacena todos los que serán creados.
-              for (Usuario userActual : usuarios) {
+              for (Usuario userActual : Controlador.usuarios) {
                 // Validación de usuario
                 if (userActual.getUsuario().compareTo(tfUsuario.getText()) == 0 &&
                         userActual.getContrasenha().compareTo(tfContrasenhia.getText()) == 0) {
@@ -101,24 +81,28 @@ public class LogIn extends JFrame{
                   if (userActual.getClass() == Doctor.class) {
                     JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                     setVisible(false);
+                    Controlador.usuario = userActual;
                     DocAccount doc = new DocAccount();
                     doc.setVisible(true);
                   }
                   else if (userActual.getClass() == Enfermero.class) {
                     JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                     setVisible(false);
+                    Controlador.usuario = userActual;
                     NuserAccount nurse = new NuserAccount();
                     nurse.setVisible(true);
                   }
                   else if (userActual.getClass() == Secretaria.class) {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                       setVisible(false);
+                      Controlador.usuario = userActual;
                       SecreAcc secreta = new SecreAcc();
                       secreta.setVisible(true);
                   }
                   else {
                       JOptionPane.showMessageDialog(null, "Bienvenido(a)!");
                       setVisible(false);
+                      Controlador.usuario = userActual;
                       PacientAcc pacient = new PacientAcc();
                       pacient.setVisible(true);
                   }

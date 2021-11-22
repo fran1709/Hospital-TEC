@@ -45,4 +45,14 @@ public class Vacuna {
   public void setNumLote(int numLote) {
     this.numLote = numLote;
   }
+
+  @Override
+  public String toString() {
+    return "Vacuna{" +
+            "fechaAplicacion=" + fechaAplicacion +
+            ", nombreVacuna='" + nombreVacuna + '\'' +
+            ", farmaceutica='" + farmaceutica + '\'' +
+            ", numLote=" + numLote +
+            '}';
+  }
 }

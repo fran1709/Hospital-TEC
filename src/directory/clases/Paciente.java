@@ -19,6 +19,7 @@ public class Paciente extends Usuario{
   private ArrayList<Cita> citas;
   private ArrayList<Diagnostico> diagnosticos;
   private ArrayList<Tratamiento> tratamientos;
+  private ArrayList<String> hospitalizaciones;
 
   /**
    *  Constructor de clase
@@ -48,6 +49,9 @@ public class Paciente extends Usuario{
     this.setCedula(cedula);
     this.historial = "Se ha registrado al paciente en el sistema. Fecha:" + LocalDate.now() + "\n";
     this.citas = new ArrayList<>();
+    this.hospitalizaciones = new ArrayList<>();
+    this.tratamientos = new ArrayList<>();
+    this.diagnosticos = new ArrayList<>();
   }
   public void Paciente(){}
 
@@ -223,6 +227,13 @@ public class Paciente extends Usuario{
     this.historial += bitacora +" Fecha: " + LocalDate.now();
   }
 
+  /**
+   * Metodo para agregar hospitalizacion
+   * @param hospitalizacion
+   */
+  public void agregarHospitalizacion(String hospitalizacion){
+    this.hospitalizaciones.add(hospitalizacion);
+  }
   // Metodos accesores.
   public Date getFechaNacimiento() {
     return fechaNacimiento;
@@ -284,7 +295,33 @@ public class Paciente extends Usuario{
     this.tratamientos = tratamientos;
   }
 
+  public void printPaciente(){
+    String msg = "Paciente{" + "\n"+
+            "Nombre: " + getNombre() + "\n"+
+            "Fecha Nacimiento: " + getFechaNacimiento() + "\n"+
+            "Cedula: " + getCedula() + "\n"+
+            "Usuario: " + getUsuario() + "\n"+
+            "Contraseña: " + getContrasenha() + "\n"+
+            "Lugar de Residencia: " + getLugarResidencia() + "\n"+
+            "Nacionalidad: " + getNacionalidad() + "\n";
+    System.out.println(msg);
+    System.out.println("NUMEROS TELEFONICOS");
+    for (String cel : this.numerosTelefonicos)
+      System.out.println(cel);
+    System.out.println("VACUNAS");
+    for (Vacuna vacuna : this.vacunasAplicadas)
+      System.out.println(vacuna.toString());
+    System.out.println("CITAS");
+    for (Cita cita : this.citas)
+      cita.printCita();
+    System.out.println("TRATAMIENTOS");
+    for (Tratamiento tratamiento : this.tratamientos)
+      tratamiento.printTratamiento();
+    System.out.println("DIAGNOSTICOS");
+    for (Diagnostico diagnostico : this.diagnosticos)
+      diagnostico.printDiagnostico();
 
+  }
   @Override
   public String toString() {
     return "Nombre: " + getNombre() ;

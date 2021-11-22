@@ -45,4 +45,15 @@ public class Tratamiento {
     private int dosis;
     private String tipo;
 
+    public void printTratamiento() {
+        String msg = "Tratamiento: " +
+                "nombre='" + nombre + '\n' +
+                ", dosis=" + dosis + '\n' +
+                ", tipo='" + tipo + '\n' ;
+        System.out.println(msg);
+    }
+    @Override
+    public String toString() {
+        return "Tratamiento: " + nombre;
+    }
 }

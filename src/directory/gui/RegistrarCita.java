@@ -1,7 +1,6 @@
 package directory.gui;
 
-import directory.clases.Cita;
-import directory.clases.Paciente;
+import directory.clases.*;
 import directory.controladores.controladores.Controlador;
 
 import javax.swing.*;
@@ -67,14 +66,45 @@ public class RegistrarCita extends JFrame {
           } catch (ParseException ex) {
             ex.printStackTrace();
           }
-          // Asignar cita al usuario respectivo.
-          Paciente paciente = (Paciente) Controlador.usuario;
-          Controlador.idCita = Controlador.idCita+1;
-          Cita newCita = new Cita(cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
-          paciente.getCitas().add(newCita);
-          for (Cita pCita : paciente.getCitas()) {
-            System.out.println(pCita.toString());
-          }
+            if (Controlador.usuario.getClass() == Paciente.class) {
+              // Asignar cita al usuario respectivo.
+              Paciente paciente = (Paciente) Controlador.usuario;
+              Controlador.idCita = Controlador.idCita + 1;
+              Cita newCita = new Cita(cbEspecialidades.getSelectedItem().toString(), fecha, tfObervation.getText(), Controlador.idCita, Integer.parseInt(cbHora.getSelectedItem().toString()));
+              paciente.getCitas().add(newCita);
+              JOptionPane.showMessageDialog(null,"Cita asignada");
+              PacientAcc newPatientAcc = new PacientAcc();
+              newPatientAcc.setVisible(true);
+
+            } else if (Controlador.usuario.getClass() == Secretaria.class) {
+              Paciente paciente = Controlador.tmpPaciente;
+              Secretaria secretaria = (Secretaria) Controlador.usuario;
+              Controlador.idCita = Controlador.idCita + 1;
+              secretaria.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
+              JOptionPane.showMessageDialog(null,"Cita asignada");
+              SecreAcc newDocAcc = new SecreAcc();
+              newDocAcc.setVisible(true);
+
+            }
+            else if (Controlador.usuario.getClass() == Enfermero.class){
+              Paciente paciente = Controlador.tmpPaciente;
+              Enfermero enfermero = (Enfermero) Controlador.usuario;
+              Controlador.idCita = Controlador.idCita + 1;
+              enfermero.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
+              JOptionPane.showMessageDialog(null,"Cita asignada");
+              NuserAccount newEnfermeroACC = new NuserAccount();
+              newEnfermeroACC.setVisible(true);
+            }
+            else if (Controlador.usuario.getClass() == Doctor.class){
+              Paciente paciente = Controlador.tmpPaciente;
+              Doctor doctor = (Doctor) Controlador.usuario;
+              Controlador.idCita = Controlador.idCita + 1;
+              doctor.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
+              JOptionPane.showMessageDialog(null,"Cita asignada");
+              DocAccount newDocAccount = new DocAccount();
+              newDocAccount.setVisible(true);
+            }
+
 
         }
       }

@@ -1,7 +1,6 @@
 package directory.gui;
 
-import directory.clases.Doctor;
-import directory.clases.Vacuna;
+import directory.clases.*;
 import directory.controladores.controladores.Controlador;
 
 import javax.swing.*;
@@ -44,9 +43,32 @@ public class MainGui extends JFrame{
     // usuario paciente
     ArrayList<String> numeros = new ArrayList<String>();
     ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+
     Controlador.registrarPaciente("mreveiz","123","Marco Reveiz","117680133",fecha,"B-",
             "Costarricense","Heredia", numeros,vacunas);
+
+    Cita cita = new Cita("Medicina General",fecha,"Sin comentarios",1,8);
+
     Controlador.registrarCentroDeAtencion(1,125,"Hospital TEC","Cartago","Hospital");
+
+    Diagnostico diagnostico = new Diagnostico("Diarrea","Leve");
+    Diagnostico diagnostico2 = new Diagnostico("Calentura","Leve");
+    Diagnostico diagnostico3 = new Diagnostico("Vomito","Grave");
+    Diagnostico diagnostico4 = new Diagnostico("Dolor de cabeza","Muy grave");
+    Controlador.catalogoDiagnosticos.add(diagnostico);
+    Controlador.catalogoDiagnosticos.add(diagnostico2);
+    Controlador.catalogoDiagnosticos.add(diagnostico3);
+    Controlador.catalogoDiagnosticos.add(diagnostico4);
+    Tratamiento tratamiento = new Tratamiento("Pastillas",1,"Medicamento");
+    Tratamiento tratamiento1 = new Tratamiento("Jarabe",1,"Medicamento");
+    Tratamiento tratamiento2 = new Tratamiento("Curita",1,"Sutura");
+
+    Controlador.catalogoTratamientos.add(tratamiento);
+    Controlador.catalogoTratamientos.add(tratamiento1);
+    Controlador.catalogoTratamientos.add(tratamiento2);
+
+
+
     // Fin usuarios prueba
 
     salirButton.addActionListener(new ActionListener() {

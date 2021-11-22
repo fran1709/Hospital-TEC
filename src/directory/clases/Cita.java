@@ -123,4 +123,20 @@ public class Cita {
 
     return "Cita " + String.valueOf(getIdentificador());
   }
+
+  public void printCita() {
+    String msg =
+          "Cita{" +'\n' +
+          "especialidad = " + especialidad + '\n' +
+          "fechaCita = " + fechaCita + '\n' +
+          "comentario = " + comentario + '\n' +
+          "identificador = " +  String.valueOf(getIdentificador()) + '\n' +
+          "estadoCita = " + estadoCita + '\n' +
+          "bitacora = " + bitacora + '\n' +
+          "hora = " + hora + '\n' +
+          "diagnosticos = " + diagnosticos +
+          '}';
+    System.out.println(msg);
+
+  }
 }

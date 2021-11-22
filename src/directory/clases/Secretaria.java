@@ -40,9 +40,10 @@ public class Secretaria extends Funcionario{
                 cita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha cancelado la cita a nombre del funcionario  " + this.getNombre());
                 paciente.actualizarHistorial("Se ha cancelado la cita ID: " + cita.getIdentificador() +" a nombre del funcionario " + this.getNombre());
                 cita.setEstadoCita("Cancelada por el centro médico");
+                cita.printCita();
             }
         }
-        System.out.println("El paciente no tiene citas");
+        //System.out.println("El paciente no tiene citas");
     }
 
     /**

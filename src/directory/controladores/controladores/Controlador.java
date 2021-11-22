@@ -19,8 +19,9 @@ public class Controlador {
     public static ArrayList<Secretaria> secretarios = new ArrayList<>();;
     public static ArrayList<Doctor> doctores = new ArrayList<>();;
     public static ArrayList<Enfermero> enfermeros = new ArrayList<>();;
-    public static String usuarioEnSesion;
-    public static String contrasehna;
+    public static ArrayList<Tratamiento> catalogoTratamientos = new ArrayList<>();
+    public static ArrayList<Diagnostico> catalogoDiagnosticos = new ArrayList<>();
+    public static Paciente tmpPaciente;
     public static Usuario usuario;
     public static int idCita = 0;
 
@@ -214,14 +215,14 @@ public class Controlador {
      * Metodo para retornar como atributo las listas de los trabajadores y pacientes registrados
      * @return
      */
-    public void getListasUsuarios() {
+    public static void getListasUsuarios() {
 
         ArrayList<Doctor> doctors = new ArrayList<>();
         ArrayList<Enfermero> enfermeroArrayList = new ArrayList<>();
         ArrayList<Paciente> newPacientes = new ArrayList<>();
         ArrayList<Secretaria> newSecretarias = new ArrayList<>();
 
-        for (Usuario usuario : this.usuarios) {
+        for (Usuario usuario : usuarios) {
             if (usuario instanceof Paciente) {
                 newPacientes.add((Paciente) usuario);
 
@@ -236,10 +237,10 @@ public class Controlador {
             }
         }
 
-        this.pacientes = newPacientes;
-        this.doctores = doctors;
-        this.enfermeros = enfermeroArrayList;
-        this.secretarios = newSecretarias;
+        pacientes = newPacientes;
+        doctores = doctors;
+        enfermeros = enfermeroArrayList;
+        secretarios = newSecretarias;
     }
 
     /**

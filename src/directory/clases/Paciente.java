@@ -47,6 +47,7 @@ public class Paciente extends Usuario{
     this.setNombre(nombre);
     this.setCedula(cedula);
     this.historial = "Se ha registrado al paciente en el sistema. Fecha:" + LocalDate.now() + "\n";
+    this.citas = new ArrayList<>();
   }
   public void Paciente(){}
 
@@ -283,10 +284,12 @@ public class Paciente extends Usuario{
     this.tratamientos = tratamientos;
   }
 
+
   @Override
   public String toString() {
-    return "Paciente{" + "\n"+
-            "Nombre: " + getNombre() + "\n"+
+    return "Nombre: " + getNombre() ;
+            /*"Paciente{" + "\n"+
+            +
             "Fecha Nacimiento: " + getFechaNacimiento() + "\n"+
             "Cedula: " + getCedula() + "\n"+
             "Usuario: " + getUsuario() + "\n"+
@@ -297,6 +300,9 @@ public class Paciente extends Usuario{
             "Numeros Telefonicos: " + getNumerosTelefonicos() + "\n"+
             "Vacunas=" + getVacunasAplicadas() + "\n"+
             '}';
+            /*
+  */
   }
+
 
 }

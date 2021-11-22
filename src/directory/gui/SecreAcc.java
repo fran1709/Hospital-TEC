@@ -1,8 +1,14 @@
 package directory.gui;
 
+import directory.clases.Cita;
+import directory.clases.Paciente;
+import directory.clases.Secretaria;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SecreAcc extends JFrame{
@@ -22,6 +28,11 @@ public class SecreAcc extends JFrame{
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+    Secretaria secretaria = (Secretaria) Controlador.usuario;
+    Controlador.getListasUsuarios();
+    ArrayList<Paciente> pacienteArrayList= Controlador.pacientes;
+    cbPacientes.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
+    cbPacientes2.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
 
     cerrarSesionButton.addActionListener(new ActionListener() {
       /**
@@ -44,8 +55,10 @@ public class SecreAcc extends JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
+        Controlador.tmpPaciente = (Paciente) cbPacientes.getSelectedItem();
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
+
       }
     });
 
@@ -56,6 +69,7 @@ public class SecreAcc extends JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
+        Controlador.tmpPaciente = (Paciente) cbPacientes.getSelectedItem();
         CancelaCita cancelacion = new CancelaCita();
         cancelacion.setVisible(true);
       }

@@ -1,8 +1,12 @@
 package directory.gui;
 
+import directory.clases.Paciente;
+import directory.controladores.controladores.Controlador;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -26,6 +30,11 @@ public class NuserAccount extends  JFrame{
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
 
+    Controlador.getListasUsuarios();
+    ArrayList<Paciente> pacienteArrayList= Controlador.pacientes;
+    cbPacientesRegistrar.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
+    cbPacientesCancelar.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
+
     cerrarSesionButton.addActionListener(new ActionListener() {
         /**
          * Cierra la ventana de Enfermero(a) y vuelve al menu principal.
@@ -47,7 +56,8 @@ public class NuserAccount extends  JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
-        //setVisible(false);
+
+        Controlador.tmpPaciente = (Paciente) cbPacientesRegistrar.getSelectedItem();
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
       }
@@ -60,6 +70,7 @@ public class NuserAccount extends  JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
+        Controlador.tmpPaciente = (Paciente) cbPacientesCancelar.getSelectedItem();
         CancelaCita cancelacion = new CancelaCita();
         cancelacion.setVisible(true);
       }

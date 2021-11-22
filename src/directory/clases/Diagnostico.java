@@ -69,4 +69,22 @@ public class Diagnostico {
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
+
+
+    public void printDiagnostico() {
+       String msg = "Diagnostico{" +
+                "nombre='" + nombre + '\n' +
+                ", nivel='" + nivel + '\n' +
+                ", Tratamientos =" ;
+        System.out.println(msg);
+        for (Tratamiento tmp : this.tratamientos) {
+            tmp.printTratamiento();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Diagnostico: " + nombre;
+
+    }
 }

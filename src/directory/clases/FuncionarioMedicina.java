@@ -24,10 +24,11 @@ public class FuncionarioMedicina extends Funcionario{
                 cita.setEstadoCita("Cita cancelada por el funcionario de medicina" + this.getNombre());
                 cita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha cancelado la cita a nombre del funcionario de medicina " + this.getNombre());
                 paciente.actualizarHistorial("Se ha cancelado la cita ID: " + cita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());
-                cita.setEstadoCita("Cancelada por el centro médico");
+                cita.setEstadoCita("Cancelada por funcionario de medicina");
+                cita.printCita();
             }
         }
-        System.out.println("El paciente no tiene citas");
+
     }
 
     /**
@@ -37,9 +38,10 @@ public class FuncionarioMedicina extends Funcionario{
     public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador, int hora){
         Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador, hora);
         pCita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha asignado la cita a nombre del funcionario de medicina " + this.getNombre());
+        pCita.setEstadoCita("Cita asignada por funcionario de medicina");
         paciente.getCitas().add(pCita);
         paciente.actualizarHistorial("Se ha asignado la cita ID: " + pCita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());
-
+        pCita.printCita();
     }
 
 

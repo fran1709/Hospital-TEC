@@ -32,6 +32,7 @@ public class AtenderCita extends JFrame{
   private JTextField tfLoteVacuna;
   private JButton btnAgregarVacuna;
   private JButton agregarDiagnosticoACitaButton;
+  private JButton hospitalizacionbtn;
 
   public AtenderCita() {
     // Atributos.
@@ -107,6 +108,14 @@ public class AtenderCita extends JFrame{
         Tratamiento tratamiento = (Tratamiento) cbTratamientos.getSelectedItem();
         diagnostico.getTratamientos().add(tratamiento);
         diagnostico.printDiagnostico();
+      }
+    });
+    hospitalizacionbtn.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Date fecha = new Date();
+        paciente.agregarHospitalizacion("Se ha hospitalizado al paciente. Fecha : " + fecha);
+        paciente.printPaciente();
       }
     });
     atenderButton.addActionListener(new ActionListener() {

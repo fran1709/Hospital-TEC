@@ -246,7 +246,7 @@
           <text value="Refrescar diagnosticos"/>
         </properties>
       </component>
-      <component id="4ec94" class="javax.swing.JButton" default-binding="true">
+      <component id="4ec94" class="javax.swing.JButton" binding="hospitalizacionbtn">
         <constraints>
           <grid row="21" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

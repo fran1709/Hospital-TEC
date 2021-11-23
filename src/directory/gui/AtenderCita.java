@@ -33,6 +33,7 @@ public class AtenderCita extends JFrame{
   private JButton btnAgregarVacuna;
   private JButton agregarDiagnosticoACitaButton;
   private JButton hospitalizacionbtn;
+  private JComboBox cbCentroMedico;
 
   public AtenderCita() {
     // Atributos.
@@ -50,6 +51,7 @@ public class AtenderCita extends JFrame{
     cbCitas.setModel(new DefaultComboBoxModel(paciente.getCitas().toArray()));
     cbDiagnosticos.setModel(new DefaultComboBoxModel(Controlador.catalogoDiagnosticos.toArray()));
     cbTratamientos.setModel((new DefaultComboBoxModel(Controlador.catalogoTratamientos.toArray())));
+    cbCentroMedico.setModel((new DefaultComboBoxModel(Controlador.centrosDeAtencion.toArray())));
 
     btnAgregarVacuna.addActionListener(new ActionListener() {
       @Override
@@ -113,8 +115,13 @@ public class AtenderCita extends JFrame{
     hospitalizacionbtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
         Date fecha = new Date();
-        paciente.agregarHospitalizacion("Se ha hospitalizado al paciente. Fecha : " + fecha);
+        CentroAtencion centroAtencion = (CentroAtencion) cbCentroMedico.getSelectedItem();
+        Cita cita = (Cita) cbCitas.getSelectedItem();
+        String nombreCentro = (String) cbCentroMedico.getSelectedItem();
+        Hospitalizacion newHospitalizacion = new Hospitalizacion(fecha,centroAtencion,funcionarioMedicina,diagnosticos,cita.getEspecialidad());
+        paciente.agregarHospitalizacion(newHospitalizacion);
         paciente.printPaciente();
       }
     });

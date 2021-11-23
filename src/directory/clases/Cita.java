@@ -12,6 +12,15 @@ public class Cita {
   private String especialidad;
   private Date fechaCita;
   private String comentario;
+
+  public int getHora() {
+    return hora;
+  }
+
+  public void setHora(int hora) {
+    this.hora = hora;
+  }
+
   private int hora;
   private int identificador;
   private String estadoCita;

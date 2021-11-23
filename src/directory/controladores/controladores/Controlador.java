@@ -256,8 +256,46 @@ public class Controlador {
         centrosDeAtencion.add(centroAtencion);
     }
 
+    /**
+     * Metodo que retorna la lista de hospitalizaciones registyradas en un rango de fechas
+     * @param fechaInicio
+     * @param fechaFinal
+     * @return
+     */
+    public static ArrayList<Hospitalizacion> getHospitalizacionesPorFecha(Date fechaInicio, Date fechaFinal){
+        ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+        for (Paciente paciente : pacientes) {
+            hospitalizacionArrayList.addAll(paciente.hospitalizacionesPorFecha(fechaInicio,fechaFinal));
+        }
+        return hospitalizacionArrayList;
+    }
 
+    /**
+     * Metodo que retorna lista de hospitalizaciones de todos los pacientes de acuerdo a un estado
+     * @param estadoH
+     * @return
+     */
+    public static ArrayList<Hospitalizacion> getHospitalizacionesPorEstado(String estadoH){
+        ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+        for (Paciente paciente :pacientes){
+            hospitalizacionArrayList.addAll(paciente.hospitalizacionesPorEstado(estadoH));
+        }
+        return hospitalizacionArrayList;
 
+    }
+
+    /**
+     * Metodo que retorna lista de hospitalizaciones de todos los pacientes de acuerdo a una especialidad dada
+     * @param especialidadH
+     * @return
+     */
+    public static ArrayList<Hospitalizacion> getHospitalizacionesPorEspecialidad(String especialidadH){
+        ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+        for (Paciente paciente :pacientes){
+            hospitalizacionArrayList.addAll(paciente.hospitalizacionesPorEspecialidad(especialidadH));
+        }
+        return hospitalizacionArrayList;
+    }
     //Metodos accesores
 
     public ArrayList<Usuario> getUsuarios() {

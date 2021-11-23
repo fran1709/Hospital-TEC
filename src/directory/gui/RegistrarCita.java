@@ -62,7 +62,8 @@ public class RegistrarCita extends JFrame {
           Date fecha = null;
           try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            fecha = formatter.parse(tfAnhio.getText()+"-"+tfMes.getText()+ "-" +tfDia.getText());
+            fecha = formatter.parse(tfDia.getText()+"-"+tfMes.getText()+ "-" +tfAnhio.getText());
+            System.out.println(fecha);
           } catch (ParseException ex) {
             ex.printStackTrace();
           }

@@ -19,7 +19,8 @@ public class Paciente extends Usuario{
   private ArrayList<Cita> citas;
   private ArrayList<Diagnostico> diagnosticos;
   private ArrayList<Tratamiento> tratamientos;
-  private ArrayList<String> hospitalizaciones;
+  private ArrayList<Hospitalizacion> hospitalizaciones;
+
 
   /**
    *  Constructor de clase
@@ -215,6 +216,52 @@ public class Paciente extends Usuario{
   }
 
   /**
+   * Retorna hospitalizacion en el lapso de la fecha dada
+   * @param fechaInicio
+   * @param fechaFinal
+   * @return
+   */
+
+  public ArrayList<Hospitalizacion> hospitalizacionesPorFecha(Date fechaInicio, Date fechaFinal) {
+    ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+    for (Hospitalizacion hosp : this.hospitalizaciones) {
+      if (fechaInicio.after(hosp.getFechaInicio()) && fechaFinal.before(fechaFinal)){
+        hospitalizacionArrayList.add(hosp);
+      }
+    }
+    return hospitalizacionArrayList;
+  }
+
+  /**
+   * Metodo que retorna lista de hospitalizaciones de acuerdo a un estado dado
+   * @param especialidadHosp
+   * @return
+   */
+  public ArrayList<Hospitalizacion> hospitalizacionesPorEspecialidad(String especialidadHosp) {
+    ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+    for (Hospitalizacion hosp : this.hospitalizaciones) {
+      if (hosp.especialidad.equals(especialidadHosp)){
+        hospitalizacionArrayList.add(hosp);
+      }
+    }
+    return hospitalizacionArrayList;
+  }
+  /**
+   * Metodo que retorna lista de hospitalizaciones de acuerdo a un estado dado
+   * @param estadoHosp
+   * @return
+   */
+  public ArrayList<Hospitalizacion> hospitalizacionesPorEstado(String estadoHosp) {
+    ArrayList<Hospitalizacion> hospitalizacionArrayList = new ArrayList<>();
+    for (Hospitalizacion hosp : this.hospitalizaciones) {
+      if (hosp.estado.equals(estadoHosp)){
+        hospitalizacionArrayList.add(hosp);
+      }
+    }
+    return hospitalizacionArrayList;
+  }
+
+  /**
    * Pone el historial de hospitalizaciones
    * @return
    */
@@ -231,7 +278,7 @@ public class Paciente extends Usuario{
    * Metodo para agregar hospitalizacion
    * @param hospitalizacion
    */
-  public void agregarHospitalizacion(String hospitalizacion){
+  public void agregarHospitalizacion(Hospitalizacion hospitalizacion){
     this.hospitalizaciones.add(hospitalizacion);
   }
   // Metodos accesores.
@@ -293,6 +340,13 @@ public class Paciente extends Usuario{
 
   public void setTratamientos(ArrayList<Tratamiento> tratamientos) {
     this.tratamientos = tratamientos;
+  }
+  public ArrayList<Hospitalizacion> getHospitalizaciones() {
+    return hospitalizaciones;
+  }
+
+  public void setHospitalizaciones(ArrayList<Hospitalizacion> hospitalizaciones) {
+    this.hospitalizaciones = hospitalizaciones;
   }
 
   public void printPaciente(){

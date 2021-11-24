@@ -1,11 +1,13 @@
 package directory.gui;
 
+import directory.auxiliarclases.JsonManager;
 import directory.clases.*;
 import directory.controladores.controladores.Controlador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class MainGui extends JFrame{
   private JButton registrarseButton;
   private JButton salirButton;
   private JLabel jlTitle;
+  private JButton bajarJSONButton;
 
   public MainGui() {
     // Atributos.
@@ -51,14 +54,7 @@ public class MainGui extends JFrame{
 
     Controlador.registrarCentroDeAtencion(1,125,"Hospital TEC","Cartago","Hospital");
 
-    Diagnostico diagnostico = new Diagnostico("Diarrea","Leve");
-    Diagnostico diagnostico2 = new Diagnostico("Calentura","Leve");
-    Diagnostico diagnostico3 = new Diagnostico("Vomito","Grave");
-    Diagnostico diagnostico4 = new Diagnostico("Dolor de cabeza","Muy grave");
-    Controlador.catalogoDiagnosticos.add(diagnostico);
-    Controlador.catalogoDiagnosticos.add(diagnostico2);
-    Controlador.catalogoDiagnosticos.add(diagnostico3);
-    Controlador.catalogoDiagnosticos.add(diagnostico4);
+
     Tratamiento tratamiento = new Tratamiento("Pastillas",1,"Medicamento");
     Tratamiento tratamiento1 = new Tratamiento("Jarabe",1,"Medicamento");
     Tratamiento tratamiento2 = new Tratamiento("Curita",1,"Sutura");
@@ -68,7 +64,25 @@ public class MainGui extends JFrame{
     Controlador.catalogoTratamientos.add(tratamiento2);
 
 
-
+    bajarJSONButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        JsonManager jsonManager = new JsonManager();
+        Controlador.getListasUsuarios();
+        jsonManager.setUsuarios(Controlador.usuarios);
+        Controlador.getListasUsuarios();
+        jsonManager.setPacientes(Controlador.pacientes);
+        jsonManager.setCentrosDeAtencion(Controlador.centrosDeAtencion);
+        jsonManager.setDoctors(Controlador.doctores);
+        jsonManager.setEnfermeros(Controlador.enfermeros);
+        jsonManager.setSecretarios(Controlador.secretarios);
+        try {
+          jsonManager.setJsons();
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
+      }
+    });
     // Fin usuarios prueba
 
     salirButton.addActionListener(new ActionListener() {
@@ -108,6 +122,7 @@ public class MainGui extends JFrame{
       }
     });
   }
+
 
   public static void main(String[] args) {
     // Instanciando el Gui.

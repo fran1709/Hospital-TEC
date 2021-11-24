@@ -30,6 +30,8 @@ public class Controlador {
      */
     public Controlador() {}
 
+
+
     /** METODOS DE VALIDACION DE USUARIOS **/
 
     /**
@@ -295,6 +297,22 @@ public class Controlador {
             hospitalizacionArrayList.addAll(paciente.hospitalizacionesPorEspecialidad(especialidadH));
         }
         return hospitalizacionArrayList;
+    }
+
+    /**
+     * Metodo que retorna citas disponibles
+     * @param paciente
+     * @return
+     */
+    public static ArrayList<Cita> getCitasDisponibles(Paciente paciente) {
+        ArrayList<Cita> citasDisp = new ArrayList<>();
+        for (Cita cita : paciente.getCitas()) {
+            if (!(cita.getEstadoCita().equals("Realizada"))){
+                citasDisp.add(cita);
+            }
+
+        }
+        return citasDisp;
     }
     //Metodos accesores
 

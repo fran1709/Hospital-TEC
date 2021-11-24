@@ -73,7 +73,6 @@ public class Cita {
    */
   public ArrayList<Tratamiento> tratamientosPorNombre(String nombre) {
     ArrayList<Tratamiento> trats = new ArrayList<>();
-
     for (Diagnostico diag : this.diagnosticos){
       trats.addAll(diag.tratamientosPorNombre(nombre));
     }

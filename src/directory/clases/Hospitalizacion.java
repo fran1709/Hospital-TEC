@@ -27,7 +27,7 @@ public class Hospitalizacion {
                 "fechaInicio =" + fechaInicio + "             " +
                 ", fechaSalida =" + fechaSalida + "             " +
                 ", centroAtencion =" + centroAtencion + "             " +
-                ", funcionarioMedicina =" + funcionarioMedicina + "             " +
+                ", funcionarioMedicina =" + funcionarioMedicina.getNombre() + "             " +
                 ", especialidad ='" + especialidad + "             "+
                 ", estado = " + estado + "             "+
                 msg;

@@ -1,1 +1,26 @@
-[{"codigo":1,"capacidadPacientes":120,"nombre":"Hospital TEC","lugarUbicacion":"Heredia","tipo":"Hospital","funcionarios":[{"tipo":"Doctor","fechaIngreso":"18 nov. 2021 19:17:25","usuario":"drMendez","contrasenha":"123","cedula":"4578123565","nombre":"Eduardo Mendez"},{"tipo":"Enfermero","fechaIngreso":"18 nov. 2021 19:17:25","usuario":"123","contrasenha":"peMendez","cedula":"4578123565","nombre":"Pedro Mendez"},{"tipo":"Secretaria","fechaIngreso":"18 nov. 2021 19:17:25","usuario":"sonia1","contrasenha":"123","cedula":"1234556","nombre":"Sonia Perez"}]}]
+[
+  {
+    "codigo": 1,
+    "capacidadPacientes": 125,
+    "nombre": "Hospital TEC",
+    "lugarUbicacion": "Cartago",
+    "tipo": "Hospital",
+    "funcionarios": []
+  },
+  {
+    "codigo": 1,
+    "capacidadPacientes": 125,
+    "nombre": "Hospital TEC",
+    "lugarUbicacion": "Cartago",
+    "tipo": "Hospital",
+    "funcionarios": []
+  },
+  {
+    "codigo": 1,
+    "capacidadPacientes": 125,
+    "nombre": "Hospital TEC",
+    "lugarUbicacion": "Cartago",
+    "tipo": "Hospital",
+    "funcionarios": []
+  }
+]

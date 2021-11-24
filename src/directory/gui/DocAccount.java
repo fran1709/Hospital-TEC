@@ -1,12 +1,15 @@
 package directory.gui;
 
+import directory.clases.Hospitalizacion;
 import directory.clases.Paciente;
 import directory.controladores.controladores.Controlador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -23,6 +26,8 @@ public class DocAccount extends JFrame{
   private JComboBox cbPacientes;
   private JComboBox cbPacientes3;
   private JComboBox cbPacientes2;
+    private JButton terminarHospButton;
+  private JComboBox cbHospi;
 
   public DocAccount() {
     // Atributos.
@@ -37,6 +42,19 @@ public class DocAccount extends JFrame{
     cbPacientes.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
     cbPacientes2.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
     cbPacientes3.setModel(new DefaultComboBoxModel(pacienteArrayList.toArray(new Paciente[0])));
+    Paciente pPaciente = (Paciente) cbPacientes.getSelectedItem();
+    cbHospi.setModel(new DefaultComboBoxModel(pPaciente.getHospitalizaciones().toArray()));
+
+    terminarHospButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Hospitalizacion hospitalizacion = (Hospitalizacion) cbHospi.getSelectedItem();
+        Date date = new Date();
+        hospitalizacion.setFechaSalida(date);
+        JOptionPane.showMessageDialog(null, "¡El paciente ha salido de ser hospitalizado el día de hoy!");
+      }
+    });
+
 
     cerrarSesionButton.addActionListener(new ActionListener() {
       /**
@@ -74,9 +92,10 @@ public class DocAccount extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         Controlador.tmpPaciente = (Paciente) cbPacientes2.getSelectedItem();
-        //setVisible(false);
+
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
+        setVisible(false);
       }
     });
 
@@ -90,6 +109,7 @@ public class DocAccount extends JFrame{
         Controlador.tmpPaciente = (Paciente) cbPacientes3.getSelectedItem();
         CancelaCita cancelacion = new CancelaCita();
         cancelacion.setVisible(true);
+        setVisible(false);
       }
     });
 
@@ -102,6 +122,7 @@ public class DocAccount extends JFrame{
       public void actionPerformed(ActionEvent e) {
         Reporte reporte = new Reporte();
         reporte.setVisible(true);
+        setVisible(false);
       }
     });
   }

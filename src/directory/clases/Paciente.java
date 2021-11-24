@@ -104,6 +104,7 @@ public class Paciente extends Usuario{
     ArrayList<Cita> tmp = new ArrayList<>();
     for (Cita cita : this.citas) {
       if (cita.getEspecialidad().equals(especialidad)) {
+
         tmp.add(cita);
       }
     }
@@ -150,6 +151,7 @@ public class Paciente extends Usuario{
     ArrayList<Diagnostico> tmp = new ArrayList<>();
     for (Cita cita: this.citas) {
       for (Diagnostico diagnostico : cita.getDiagnosticos()) {
+        System.out.println(diagnostico.toString());
         if (diagnostico.getNombre().equals(nombre))
           tmp.add(diagnostico);
       }
@@ -374,7 +376,9 @@ public class Paciente extends Usuario{
     System.out.println("DIAGNOSTICOS");
     for (Diagnostico diagnostico : this.diagnosticos)
       diagnostico.printDiagnostico();
-
+    System.out.println("HOSPITALIZACIONES");
+    for (Hospitalizacion hospitalizacion : this.hospitalizaciones)
+      System.out.println(hospitalizacion.toString());
   }
   @Override
   public String toString() {

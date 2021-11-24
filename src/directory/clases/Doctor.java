@@ -42,13 +42,13 @@ public class Doctor extends FuncionarioMedicina{
    * @param diagnosticos
    */
   public void atenderCita(Paciente paciente, Cita cita,ArrayList<Diagnostico> diagnosticos) {
-    if (cita.getEstadoCita().equals("Registrada") | cita.getEstadoCita().equals("Cita asignada por funcionario de medicina")){
-      if (!diagnosticos.isEmpty()) {
-        cita.getDiagnosticos().addAll(diagnosticos);
-        cita.actualizarBitacora("Fecha: " + LocalDateTime.now() + "Se ha atendido la cita a nombre del funcionario de medicina " + this.getNombre());
-        cita.setEstadoCita("Realizada");
-        paciente.actualizarHistorial("Se ha atendido la cita ID: " + cita.getIdentificador() + " a nombre del funcionario de medicina " + this.getNombre());
-      }
+    if (cita.getEstadoCita().equals("Registrada") | cita.getEstadoCita().equals("Asignada")){
+
+      cita.getDiagnosticos().addAll(diagnosticos);
+      cita.actualizarBitacora("Fecha: " + LocalDateTime.now() + "Se ha atendido la cita a nombre del funcionario de medicina " + this.getNombre());
+      cita.setEstadoCita("Realizada");
+      paciente.actualizarHistorial("Se ha atendido la cita ID: " + cita.getIdentificador() + " a nombre del funcionario de medicina " + this.getNombre());
+
     }
     //System.out.println("La cita no tiene el estado Registrada o Asignada.");
   }

@@ -38,7 +38,7 @@ public class FuncionarioMedicina extends Funcionario{
     public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador, int hora){
         Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador, hora);
         pCita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha asignado la cita a nombre del funcionario de medicina " + this.getNombre());
-        pCita.setEstadoCita("Cita asignada por funcionario de medicina");
+        pCita.setEstadoCita("Asignada");
         paciente.getCitas().add(pCita);
         paciente.actualizarHistorial("Se ha asignado la cita ID: " + pCita.getIdentificador() +" a nombre del funcionario de medicina " + this.getNombre());
         pCita.printCita();
@@ -148,12 +148,11 @@ public class FuncionarioMedicina extends Funcionario{
      * @return
      */
     public ArrayList<Cita> cantidadCitasPorEspecialidad(ArrayList<Paciente> pacientes, String especialidad){
-        ArrayList<Cita> citas = new ArrayList<>();
-
+        ArrayList<Cita> pCitas = new ArrayList<>();
         for (Paciente paciente : pacientes) {
-            citas.addAll(paciente.citasDePacientePorEspecialidad(especialidad));
+            pCitas.addAll(paciente.citasDePacientePorEspecialidad(especialidad));
         }
-        return citas;
+        return pCitas;
     }
 
     /**

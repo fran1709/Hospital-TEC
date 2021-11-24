@@ -45,8 +45,11 @@ public class PacientAcc extends JFrame{
        */
       @Override
       public void actionPerformed(ActionEvent e) {
+
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
+        setVisible(false);
+
       }
     });
 
@@ -59,6 +62,7 @@ public class PacientAcc extends JFrame{
       public void actionPerformed(ActionEvent e) {
         CancelaCita cancelacion = new CancelaCita();
         cancelacion.setVisible(true);
+        setVisible(false);
       }
     });
 
@@ -71,6 +75,7 @@ public class PacientAcc extends JFrame{
       public void actionPerformed(ActionEvent e) {
         Reporte reporte = new Reporte();
         reporte.setVisible(true);
+        setVisible(false);
       }
     });
   }

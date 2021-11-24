@@ -40,7 +40,6 @@ public class Diagnostico {
         for (Tratamiento tratamiento: this.tratamientos) {
             if (tratamiento.getNombre().equals(nombre))
                 trats.add(tratamiento);
-
         }
         return trats;
     }

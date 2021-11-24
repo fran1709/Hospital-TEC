@@ -1,1 +1,12 @@
-[{"codigoMedico":1,"especialidades":["Ginecologia","Pediatria"],"tipo":"Doctor","fechaIngreso":"18 nov. 2021 19:17:25","usuario":"drMendez","contrasenha":"123","cedula":"4578123565","nombre":"Eduardo Mendez"}]
+[
+  {
+    "codigoMedico": 1,
+    "especialidades": [],
+    "tipo": "Doctor",
+    "fechaIngreso": "24 nov. 2021 06:36:46",
+    "usuario": "drMendez",
+    "contrasenha": "123",
+    "cedula": "4578123565",
+    "nombre": "Eduardo Mendez"
+  }
+]

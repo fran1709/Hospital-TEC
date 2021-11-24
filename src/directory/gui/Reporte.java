@@ -96,7 +96,6 @@ public class Reporte extends JFrame{
           textField1.setVisible(false);
 
         }else if (choice.equals("Por estado")) {
-
           tf1.setVisible(true);
           tf1.setText("Filtro por estado: ");
           textField1.setVisible(true);
@@ -143,6 +142,14 @@ public class Reporte extends JFrame{
           tf1.setVisible(true);
           textField1.setVisible(true);
           tf1.setText("Filtro por nombre de diagnóstico: ");
+        }else if (choice.equals("Por nombre de tratamiento")){
+          tf1.setVisible(true);
+          textField1.setVisible(true);
+          tf1.setText("Filtro por nombre de tratamiento: ");
+        }else if (choice.equals("Por tipo de tratamiento")){
+          tf1.setVisible(true);
+          textField1.setVisible(true);
+          tf1.setText("Filtro por tipo de tratamiento: ");
         }
 
       }
@@ -156,6 +163,16 @@ public class Reporte extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
+        if (Controlador.usuario.getClass() == Doctor.class){
+          DocAccount docAccount = new DocAccount();
+          docAccount.setVisible(true);
+        } else if (Controlador.usuario.getClass() == Enfermero.class){
+          NuserAccount account = new NuserAccount();
+          account.setVisible(true);
+        } else if (Controlador.usuario.getClass() == Paciente.class){
+          PacientAcc account = new PacientAcc();
+          account.setVisible(true);
+        }
       }
     });
 
@@ -204,8 +221,8 @@ public class Reporte extends JFrame{
               JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionario");
           }
           // Consulta de Citas de Enfermeros y Doctores
-          if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-            FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+          if (Controlador.usuario.getClass() == Doctor.class) {
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
             if (choice.equals("Por rango de fechas")) {
               String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
               String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
@@ -226,6 +243,37 @@ public class Reporte extends JFrame{
               citasArrayList = funcionarioMedicina.cantidadCitasPorFecha(Controlador.pacientes, dateInicio, dateFinal);
             } else if (choice.equals("Por estado")) {
               citasArrayList = funcionarioMedicina.cantidadCitasPorEstado(Controlador.pacientes, textField1.getText());
+              System.out.println(citasArrayList.isEmpty());
+            } else if (choice.equals("Por especialidad")) {
+              citasArrayList = funcionarioMedicina.cantidadCitasPorEspecialidad(Controlador.pacientes, textField1.getText());
+            } else if (choice.equals("Por nombre de paciente")) {
+              Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
+              citasArrayList = paciente.getCitas();
+            }
+          }
+          if (Controlador.usuario.getClass() == Enfermero.class) {
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
+            if (choice.equals("Por rango de fechas")) {
+              String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
+              String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
+              SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+              Date dateInicio = null;
+              Date dateFinal = null;
+              try {
+                dateInicio = formatter.parse(date_inicio);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              try {
+                dateFinal = formatter.parse(date_final);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+
+              citasArrayList = funcionarioMedicina.cantidadCitasPorFecha(Controlador.pacientes, dateInicio, dateFinal);
+            } else if (choice.equals("Por estado")) {
+              citasArrayList = funcionarioMedicina.cantidadCitasPorEstado(Controlador.pacientes, textField1.getText());
+              System.out.println(citasArrayList.isEmpty());
             } else if (choice.equals("Por especialidad")) {
               citasArrayList = funcionarioMedicina.cantidadCitasPorEspecialidad(Controlador.pacientes, textField1.getText());
             } else if (choice.equals("Por nombre de paciente")) {
@@ -277,7 +325,7 @@ public class Reporte extends JFrame{
           list.setModel(listModel);
         }
 
-        if (cbReportes.equals("Diagnosticos")) {
+        else if (reporte.equals("Diagnosticos")) {
 
           String choice = (String) comboBox1.getSelectedItem();
           ArrayList<Diagnostico> diagnosticoArrayList = new ArrayList<>();
@@ -310,8 +358,9 @@ public class Reporte extends JFrame{
               JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionario");
 
           }
-          if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-            FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+          if (Controlador.usuario.getClass() == Doctor.class) {
+            System.out.println("entra");
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
             Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
             if (choice.equals("Por rango de fechas")) {
               String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
@@ -335,23 +384,61 @@ public class Reporte extends JFrame{
             } else if (choice.equals("Por nombre de diagnóstico")) {
               diagnosticoArrayList = funcionarioMedicina.diagnosticosPacientePorNombre(paciente, textField1.getText());
             }
+
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Nombre" + "                                          " + "Nivel");
+            for (Diagnostico diagnostico : diagnosticoArrayList) {
+              String diagRow =
+                      String.valueOf(diagnostico.getNombre()) + "                                          " +
+                              diagnostico.getNivel();
+              listModel.addElement(diagRow);
+            }
+            list.setModel(listModel);
+          }
+          if (Controlador.usuario.getClass() == Enfermero.class) {
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
+            Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
+            if (choice.equals("Por rango de fechas")) {
+              String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
+              String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
+              SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+              Date dateInicio = null;
+              Date dateFinal = null;
+              try {
+                dateInicio = formatter.parse(date_inicio);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              try {
+                dateFinal = formatter.parse(date_final);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              diagnosticoArrayList = funcionarioMedicina.diagnosticosPacientePorFecha(paciente, dateInicio, dateFinal);
+            } else if (choice.equals("Por nivel")) {
+              diagnosticoArrayList = funcionarioMedicina.diagnosticosPacientePorNivel(paciente, textField1.getText());
+            } else if (choice.equals("Por nombre de diagnóstico")) {
+              diagnosticoArrayList = funcionarioMedicina.diagnosticosPacientePorNombre(paciente, textField1.getText());
+            }
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Nombre" + "                                          " + "Nivel");
+            for (Diagnostico diagnostico : diagnosticoArrayList) {
+              String diagRow =
+                      String.valueOf(diagnostico.getNombre()) + "                                          " +
+                              diagnostico.getNivel();
+              listModel.addElement(diagRow);
+            }
+            list.setModel(listModel);
           }
           if (Controlador.usuario.getClass() == Secretaria.class) {
             JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionarios de medicina");
           }
-          // Llena el list Table
-          DefaultListModel<String> listModel = new DefaultListModel<>();
-          listModel.addElement("Nombre" + "                                          " + "Nivel");
-          for (Diagnostico diagnostico : diagnosticoArrayList) {
-            String diagRow =
-                    String.valueOf(diagnostico.getNombre()) + "                                          " +
-                            diagnostico.getNivel();
-            listModel.addElement(diagRow);
-          }
-          list.setModel(listModel);
+
         }
 
-        if (cbReportes.equals("Tratamientos")) {
+        else if (reporte.equals("Tratamientos")) {
           String choice = (String) comboBox1.getSelectedItem();
           ArrayList<Tratamiento> tratamientoArrayList = new ArrayList<>();
 
@@ -381,8 +468,47 @@ public class Reporte extends JFrame{
             }else {
               JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionario");
             }
-          } else if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-            FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+          } else if (Controlador.usuario.getClass() == Doctor.class) {
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
+            Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
+            if (choice.equals("Por rango de fechas")) {
+              String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
+              String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
+              SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+              Date dateInicio = null;
+              Date dateFinal = null;
+              try {
+                dateInicio = formatter.parse(date_inicio);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              try {
+                dateFinal = formatter.parse(date_final);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              tratamientoArrayList = funcionarioMedicina.tratamientosPacientePorFechas(paciente, dateInicio, dateFinal);
+            } else if (choice.equals("Por tipo de tratamiento")) {
+              tratamientoArrayList = funcionarioMedicina.tratamientosPacientePorTipo(paciente, textField1.getText());
+            } else if (choice.equals("Por nombre de tratamiento")) {
+              tratamientoArrayList = funcionarioMedicina.tratamientosPacientePorNombre(paciente, textField1.getText());
+            } else if (Controlador.usuario.getClass() == Secretaria.class) {
+              JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionarios de medicina");
+            }
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Nombre" + "                                          " + "Tipo" + "                                          " + "Dosis");
+            for (Tratamiento tratamiento : tratamientoArrayList) {
+              String tratRow =
+                      String.valueOf(tratamiento.getNombre()) + "                                          " +
+                              tratamiento.getTipo() + "                                          " +
+                              tratamiento.getDosis();
+              listModel.addElement(tratRow);
+            }
+            list.setModel(listModel);
+
+          }else if (Controlador.usuario.getClass() == Enfermero.class) {
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
             Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
             if (choice.equals("Por rango de fechas")) {
               String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
@@ -424,12 +550,14 @@ public class Reporte extends JFrame{
 
         }
 
-
-        if (cbReportes.equals("Cantidad Citas")) {
+        else if (reporte.equals("Cantidad Citas")) {
           ArrayList<Cita> citasArrayList = new ArrayList<>();
-          String choice = (String) cbReportes.getSelectedItem();
-          if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-            FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+          String choice = (String) comboBox1.getSelectedItem();
+
+
+          if (Controlador.usuario.getClass() == Doctor.class) {
+
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
             if (choice.equals("Por rango de fechas")) {
               String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
               String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
@@ -466,18 +594,58 @@ public class Reporte extends JFrame{
             }
             list.setModel(listModel);
 
-          } else {
+          } else if (Controlador.usuario.getClass() == Enfermero.class) {
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
+            if (choice.equals("Por rango de fechas")) {
+              String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
+              String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
+              SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+              Date dateInicio = null;
+              Date dateFinal = null;
+              try {
+                dateInicio = formatter.parse(date_inicio);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              try {
+                dateFinal = formatter.parse(date_final);
+              } catch (ParseException ex) {
+                ex.printStackTrace();
+              }
+              citasArrayList = funcionarioMedicina.cantidadCitasPorFecha(Controlador.pacientes, dateInicio, dateFinal);
+            } else if (choice.equals("Por especialidad")) {
+              citasArrayList = funcionarioMedicina.cantidadCitasPorEspecialidad(Controlador.pacientes, textField1.getText());
+            } else if (choice.equals("Por estado")) {
+              citasArrayList = funcionarioMedicina.cantidadCitasPorEstado(Controlador.pacientes, textField1.getText());
+            }
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Identificador" + "                                          " + "Fecha" + "                                          " + "Hora" +
+                    "                                          " + "Estado");
+            for (Cita cita : citasArrayList) {
+              String citaRow =
+                      String.valueOf(cita.getIdentificador()) + "                                          " +
+                              cita.getFechaCita() + "                         " +
+                              String.valueOf(cita.getHora()) + "                                     " +
+                              cita.getEstadoCita();
+              listModel.addElement(citaRow);
+            }
+            list.setModel(listModel);
+
+          }else {
             JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionarion de medicina");
           }
         }
 
+        else if (reporte.equals("Cantidad Diagnosticos")) {
 
-        if (cbReportes.equals("Cantidad Diagnosticos")) {
-          if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-            ArrayList<Diagnostico> diagnosticoArrayList = new ArrayList<>();
-            String choice = (String) cbReportes.getSelectedItem();
-            if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
-              FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+
+          ArrayList<Diagnostico> diagnosticoArrayList = new ArrayList<>();
+
+          String choice = (String) comboBox1.getSelectedItem();
+
+          if (Controlador.usuario.getClass() == Doctor.class) {
+              Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
               if (choice.equals("Por rango de fechas")) {
                 String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
                 String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
@@ -494,19 +662,74 @@ public class Reporte extends JFrame{
                 } catch (ParseException ex) {
                   ex.printStackTrace();
                 }
-                ArrayList<Cita> citasArrayList = funcionarioMedicina.cantidadCitasPorFecha(Controlador.pacientes, dateInicio, dateFinal);
-                for (Cita cita : citasArrayList) {
-                  diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                for (Paciente paciente : Controlador.pacientes) {
+                  diagnosticoArrayList.addAll(paciente.diagnosticosPorFecha(dateInicio,dateFinal));
                 }
               } else if (choice.equals("Por especialidad")) {
-                ArrayList<Cita> citasArrayList = funcionarioMedicina.cantidadCitasPorEstado(Controlador.pacientes, textField1.getText());
-                for (Cita cita : citasArrayList) {
-                  diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                for (Paciente paciente : Controlador.pacientes) {
+                  for (Cita cita : paciente.getCitas()) {
+                    if (cita.getEspecialidad().equals(textField1.getText())) {
+                      diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                    }
+                  }
                 }
               } else if (choice.equals("Por estado")) {
-                ArrayList<Cita> citasArrayList = funcionarioMedicina.cantidadCitasPorEspecialidad(Controlador.pacientes, textField1.getText());
-                for (Cita cita : citasArrayList) {
-                  diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                for (Paciente paciente : Controlador.pacientes) {
+                  for (Cita cita : paciente.getCitas()) {
+                    if (cita.getEstadoCita().equals(textField1.getText())) {
+                      diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                    }
+                  }
+                }
+              }
+              // Llena el list Table
+              DefaultListModel<String> listModel = new DefaultListModel<>();
+              listModel.addElement("Nombre" + "                                          " + "Nivel");
+              for (Diagnostico diagnostico : diagnosticoArrayList) {
+                String diagRow =
+                        diagnostico.getNombre() + "                                          " +
+                                diagnostico.getNivel();
+                listModel.addElement(diagRow);
+              }
+              list.setModel(listModel);
+            }
+          else
+              if (Controlador.usuario.getClass() == Enfermero.class) {
+              Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
+              if (choice.equals("Por rango de fechas")) {
+                String date_inicio = tfDia.getText() + "-" + tfMes.getText() + "-" + tfAnhio.getText();
+                String date_final = tfDiaFinal.getText() + "-" + tfMesFinal.getText() + "-" + tfAnhioFinal.getText();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                Date dateInicio = null;
+                Date dateFinal = null;
+                try {
+                  dateInicio = formatter.parse(date_inicio);
+                } catch (ParseException ex) {
+                  ex.printStackTrace();
+                }
+                try {
+                  dateFinal = formatter.parse(date_final);
+                } catch (ParseException ex) {
+                  ex.printStackTrace();
+                }
+                for (Paciente paciente : Controlador.pacientes) {
+                  diagnosticoArrayList.addAll(paciente.diagnosticosPorFecha(dateInicio,dateFinal));
+                }
+              } else if (choice.equals("Por especialidad")) {
+                for (Paciente paciente : Controlador.pacientes) {
+                  for (Cita cita : paciente.getCitas()) {
+                    if (cita.getEspecialidad().equals(textField1.getText())) {
+                      diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                    }
+                  }
+                }
+              } else if (choice.equals("Por estado")) {
+                for (Paciente paciente : Controlador.pacientes) {
+                  for (Cita cita : paciente.getCitas()) {
+                    if (cita.getEstadoCita().equals(textField1.getText())) {
+                      diagnosticoArrayList.addAll(cita.getDiagnosticos());
+                    }
+                  }
                 }
               }
               // Llena el list Table
@@ -519,18 +742,41 @@ public class Reporte extends JFrame{
                 listModel.addElement(diagRow);
               }
               list.setModel(listModel);
-            }
-          }else {
+          }
+            else {
             JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionarion de medicina");
           }
+
+
         }
 
-        if (cbReportes.equals("Cantidad Tratamientos")) {
+        else if (reporte.equals("Cantidad Tratamientos")) {
+
           String choice = (String) comboBox1.getSelectedItem();
-          FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
           Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
           ArrayList<Tratamiento> tratamientoArrayList = new ArrayList<>();
-          if (Controlador.usuario.getClass() == FuncionarioMedicina.class) {
+          if (Controlador.usuario.getClass() == Doctor.class) {
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
+            if (choice.equals("Conteo general")) {
+              tratamientoArrayList = funcionarioMedicina.cantidadTratamientosGeneral(Controlador.pacientes);
+            } else if (choice.equals("Por especialidad")) {
+              tratamientoArrayList = funcionarioMedicina.cantidadTratamientosPorEspecialidad(Controlador.pacientes, textField1.getText());
+            } else if (choice.equals("Por nombre de paciente")) {
+              tratamientoArrayList = funcionarioMedicina.cantidadTratamientosPorPaciente(paciente);
+            }
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Nombre" + "                                          " + "Tipo" + "                                          " + "Dosis");
+            for (Tratamiento tratamiento : tratamientoArrayList) {
+              String tratRow =
+                      String.valueOf(tratamiento.getNombre()) + "                                          " +
+                              tratamiento.getTipo() + "                                          " +
+                              tratamiento.getDosis();
+              listModel.addElement(tratRow);
+            }
+            list.setModel(listModel);
+          }else if (Controlador.usuario.getClass() == Enfermero.class) {
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
             if (choice.equals("Conteo general")) {
               tratamientoArrayList = funcionarioMedicina.cantidadTratamientosGeneral(Controlador.pacientes);
             } else if (choice.equals("Por especialidad")) {
@@ -553,7 +799,8 @@ public class Reporte extends JFrame{
             JOptionPane.showMessageDialog(null, "Selecciona otra opcion, esta opcion es solo para funcionarios de medicina");
           }
         }
-        if (cbReportes.equals("Hospitalizaciones")) {
+
+        else if (reporte.equals("Hospitalizaciones")) {
 
           if (Controlador.usuario.getClass() == Paciente.class){
             Paciente paciente = (Paciente) Controlador.usuario;
@@ -566,10 +813,8 @@ public class Reporte extends JFrame{
               listModel.addElement(hospitalizacion.toString());
             }
             list.setModel(listModel);
-
-
           }
-          else if (Controlador.usuario.getClass() == Secretaria.class){
+           if (Controlador.usuario.getClass() == Secretaria.class){
             Secretaria secretaria = (Secretaria) Controlador.usuario;
             String choice = (String) comboBox1.getSelectedItem();
             ArrayList<Hospitalizacion> hospitalizaciones = new ArrayList<>();
@@ -610,10 +855,12 @@ public class Reporte extends JFrame{
             }
             list.setModel(listModel);
 
-          }else if (Controlador.usuario.getClass() == FuncionarioMedicina.class){
-            FuncionarioMedicina funcionarioMedicina = (FuncionarioMedicina) Controlador.usuario;
+          } if (Controlador.usuario.getClass() == Doctor.class){
+
+            Doctor funcionarioMedicina = (Doctor) Controlador.usuario;
             Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
             ArrayList<Hospitalizacion> hospitalizaciones = paciente.getHospitalizaciones();
+
             // Llena el list Table
             DefaultListModel<String> listModel = new DefaultListModel<>();
             listModel.addElement("Hospitalizaciones");
@@ -623,6 +870,20 @@ public class Reporte extends JFrame{
             }
             list.setModel(listModel);
 
+          } if (Controlador.usuario.getClass() == Enfermero.class){
+
+            Enfermero funcionarioMedicina = (Enfermero) Controlador.usuario;
+            Paciente paciente = (Paciente) cbPacientes.getSelectedItem();
+            ArrayList<Hospitalizacion> hospitalizaciones = paciente.getHospitalizaciones();
+            System.out.println("Entra");
+            // Llena el list Table
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addElement("Hospitalizaciones");
+            listModel.addElement("");
+            for (Hospitalizacion hospitalizacion : hospitalizaciones) {
+              listModel.addElement(hospitalizacion.toString());
+            }
+            list.setModel(listModel);
           }
         }
       }

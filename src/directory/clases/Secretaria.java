@@ -57,6 +57,7 @@ public class Secretaria extends Funcionario{
     public void asignarCita(Paciente paciente, String especialidad, Date fechaCita, String comentario, int identificador, int hora) {
         Cita pCita = new Cita(especialidad,fechaCita,comentario,identificador, hora);
         pCita.actualizarBitacora("Fecha: " +  LocalDateTime.now() + "Se ha asignado la cita a nombre del funcionario " + this.getNombre());
+        pCita.setEstadoCita("Asignada");
         paciente.getCitas().add(pCita);
         paciente.actualizarHistorial("Se ha asignado la cita ID: " + pCita.getIdentificador() +" a nombre del funcionario " + this.getNombre());
     }

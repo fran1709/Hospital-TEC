@@ -74,7 +74,7 @@ public class DoctorGUI extends JFrame{
           String nombre = textFieldNombre.getText();
           String cedula = textFieldCedula.getText();
           String codigoMedico = textFieldCodigoMedico.getText();
-          CentroAtencion centroAtencion = (CentroAtencion) comboBoxArea.getSelectedItem();
+          CentroAtencion centroAtencion = (CentroAtencion) comboBoxCentro.getSelectedItem();
           String usuario = textFieldUsuario.getText();
           String contra = TextFieldContra.getText();
           Date fecha = new Date();

@@ -35,7 +35,7 @@ public class RegistrarCita extends JFrame {
     setSize(450,400);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
-    
+
 
     volverButton.addActionListener(new ActionListener() {
       /**

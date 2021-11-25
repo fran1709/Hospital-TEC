@@ -65,6 +65,7 @@ public class MainGui extends JFrame{
     Controlador.catalogoTratamientos.add(tratamiento2);
 
      */
+    Controlador.registrarCentroDeAtencion(1,125,"Hospital TEC","Cartago","Hospital");
 
     if (Controlador.catalogoTratamientos.isEmpty()){
       Tratamiento tratamiento = new Tratamiento("Pastillas",1,"Medicamento");

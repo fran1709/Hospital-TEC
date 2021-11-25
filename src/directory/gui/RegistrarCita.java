@@ -1,5 +1,6 @@
 package directory.gui;
 
+import directory.auxiliarclases.JavaMailAPI;
 import directory.clases.*;
 import directory.controladores.controladores.Controlador;
 
@@ -24,15 +25,21 @@ public class RegistrarCita extends JFrame {
   private JComboBox cbEspecialidades;
   private JTextField tfObervation;
   private JButton asignarButton;
+  private JButton correoBTN;
+  private JTextField tfCorreo;
 
   public RegistrarCita() {
     // Atributos.
     setContentPane(RegistrandoCitaWindow);
     setTitle("Hospital TEC");
-    setSize(450,300);
-    //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(450,400);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
+
+    if (!(Controlador.usuario.getClass() == Paciente.class)) {
+      correoBTN.setVisible(false);
+      tfCorreo.setVisible(false);
+    }
 
     volverButton.addActionListener(new ActionListener() {
       /**
@@ -72,6 +79,11 @@ public class RegistrarCita extends JFrame {
               Cita newCita = new Cita(cbEspecialidades.getSelectedItem().toString(), fecha, tfObervation.getText(), Controlador.idCita, Integer.parseInt(cbHora.getSelectedItem().toString()));
               paciente.getCitas().add(newCita);
               JOptionPane.showMessageDialog(null,"Cita asignada");
+              try {
+                JavaMailAPI.enviarCorreo(paciente.getNombre(),tfCorreo.getText(), newCita.printCitaHTML());
+              } catch (Exception ex) {
+                ex.printStackTrace();
+              }
               setVisible(false);
               PacientAcc newPatientAcc = new PacientAcc();
               newPatientAcc.setVisible(true);

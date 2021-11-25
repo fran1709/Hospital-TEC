@@ -23,13 +23,13 @@ public class Hospitalizacion {
         for (Diagnostico diagnostico : diagnosticos) {
             msg += diagnostico.toString()+ "          ";
         }
-        return "Hospitalizacion:    " + "             " +
-                "fechaInicio =" + fechaInicio + "             " +
-                ", fechaSalida =" + fechaSalida + "             " +
-                ", centroAtencion =" + centroAtencion + "             " +
-                ", funcionarioMedicina =" + funcionarioMedicina.getNombre() + "             " +
-                ", especialidad ='" + especialidad + "             "+
-                ", estado = " + estado + "             "+
+        return "Hospitalizacion:    "+
+                "fechaInicio =" + fechaInicio +
+                ", fechaSalida =" + fechaSalida +
+                ", centroAtencion =" + centroAtencion  +
+                ", funcionarioMedicina =" + funcionarioMedicina.getNombre()  +
+                ", especialidad ='" + especialidad +
+                ", estado = " + estado +
                 msg;
 
 

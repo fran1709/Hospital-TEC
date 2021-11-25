@@ -801,6 +801,8 @@ public class Reporte extends JFrame{
         }
 
         else if (reporte.equals("Hospitalizaciones")) {
+          String msg = "";
+          msg += "Hospitalizaciones\n";
 
           if (Controlador.usuario.getClass() == Paciente.class){
             Paciente paciente = (Paciente) Controlador.usuario;
@@ -811,8 +813,10 @@ public class Reporte extends JFrame{
             listModel.addElement("");
             for (Hospitalizacion hospitalizacion : hospitalizaciones) {
               listModel.addElement(hospitalizacion.toString());
+              msg += hospitalizacion.toString() + "\n";
             }
             list.setModel(listModel);
+            paciente.historialPaciente();
           }
            if (Controlador.usuario.getClass() == Secretaria.class){
             Secretaria secretaria = (Secretaria) Controlador.usuario;
@@ -852,8 +856,10 @@ public class Reporte extends JFrame{
             listModel.addElement("");
             for (Hospitalizacion hospitalizacion : hospitalizaciones) {
               listModel.addElement(hospitalizacion.toString());
+              msg += hospitalizacion.toString() + "\n";
             }
             list.setModel(listModel);
+
 
           } if (Controlador.usuario.getClass() == Doctor.class){
 
@@ -867,6 +873,7 @@ public class Reporte extends JFrame{
             listModel.addElement("");
             for (Hospitalizacion hospitalizacion : hospitalizaciones) {
               listModel.addElement(hospitalizacion.toString());
+              msg += hospitalizacion.toString() + "\n";
             }
             list.setModel(listModel);
 
@@ -882,10 +889,15 @@ public class Reporte extends JFrame{
             listModel.addElement("");
             for (Hospitalizacion hospitalizacion : hospitalizaciones) {
               listModel.addElement(hospitalizacion.toString());
+              msg += hospitalizacion.toString() + "\n";
             }
+
             list.setModel(listModel);
+
           }
+          Controlador.getHTML(msg);
         }
+
       }
     });
   }

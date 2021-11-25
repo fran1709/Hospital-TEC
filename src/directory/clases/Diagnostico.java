@@ -69,7 +69,17 @@ public class Diagnostico {
         this.nivel = nivel;
     }
 
+    public String  printDiagnosticoHTML() {
+        String msg = "Diagnostico{" +
+                "nombre='" + nombre + '\n' +
+                ", nivel='" + nivel + '\n' +
+                ", Tratamientos =\n" ;
 
+        for (Tratamiento tmp : this.tratamientos) {
+            msg += tmp.toString() + "\n";
+        }
+        return msg;
+    }
     public void printDiagnostico() {
        String msg = "Diagnostico{" +
                 "nombre='" + nombre + '\n' +
@@ -84,6 +94,5 @@ public class Diagnostico {
     @Override
     public String toString() {
         return "Diagnostico: " + nombre;
-
     }
 }

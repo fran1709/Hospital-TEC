@@ -64,13 +64,15 @@ public class Paciente extends Usuario implements Exportable{
 
   public void reportarCitasHTML (ArrayList<Cita> citas) {
     try {
-      File f = new File(".../src/htmls/UltimoReporteCitasPaciente.html");
+      //Path
+      String path = System.getProperty("user.dir") + "\\src\\htmls\\";
+      File f = new File(path + "UltimoReporteCitasPaciente.html");
       BufferedWriter bw = new BufferedWriter(new FileWriter(f));
       bw.write("<html>");
       bw.write("<head><title>Citas</title></head>");
       bw.write("<body>");
       for (Cita cita : citas)
-        bw.write("<p>" + cita.toString() + "</p>");
+        bw.write("<p>" + cita.printCitaHTML() + "</p>");
       bw.write("</html>");
       bw.close();
       Desktop.getDesktop().browse(f.toURI());
@@ -81,13 +83,14 @@ public class Paciente extends Usuario implements Exportable{
 
   public void reportarDiagnosticoHTML (ArrayList<Diagnostico> citas) {
     try {
-      File f = new File(".../src/htmls/UltimoReporteDiagnosticosPaciente.html");
+      String path = System.getProperty("user.dir") + "\\src\\htmls\\";
+      File f = new File(path + "UltimoReporteDiagnosticosPaciente.html");
       BufferedWriter bw = new BufferedWriter(new FileWriter(f));
       bw.write("<html>");
       bw.write("<head><title>Diagnostico</title></head>");
       bw.write("<body>");
       for (Diagnostico cita : citas)
-        bw.write("<p>" + cita.toString() + "</p>");
+        bw.write("<p>" + cita.printDiagnosticoHTML() + "</p>");
       bw.write("</html>");
       bw.close();
       Desktop.getDesktop().browse(f.toURI());
@@ -98,7 +101,8 @@ public class Paciente extends Usuario implements Exportable{
 
   public void reportarTratamientoHTML (ArrayList<Tratamiento> citas) {
     try {
-      File f = new File(".../src/htmls/UltimoReporteTratamientosPaciente.html");
+      String path = System.getProperty("user.dir") + "\\src\\htmls\\";
+      File f = new File(path + "UltimoReporteTratamientosPaciente.html");
       BufferedWriter bw = new BufferedWriter(new FileWriter(f));
       bw.write("<html>");
       bw.write("<head><title>Tratamiento</title></head>");
@@ -115,7 +119,8 @@ public class Paciente extends Usuario implements Exportable{
 
   public void reportarHistorial () {
     try {
-      File f = new File(".../src/htmls/UltimoReporteHistorialPaciente.html");
+      String path = System.getProperty("user.dir") + "\\src\\htmls\\";
+      File f = new File(path + "src/htmls/UltimoReporteHistorialPaciente.html");
       BufferedWriter bw = new BufferedWriter(new FileWriter(f));
       bw.write("<html>");
       bw.write("<head><title>Historial</title></head>");
@@ -437,6 +442,8 @@ public class Paciente extends Usuario implements Exportable{
   public void setHospitalizaciones(ArrayList<Hospitalizacion> hospitalizaciones) {
     this.hospitalizaciones = hospitalizaciones;
   }
+
+
 
   public void printPaciente(){
     String msg = "Paciente{" + "\n"+

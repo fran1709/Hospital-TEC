@@ -2,6 +2,10 @@ package directory.controladores.controladores;
 
 import directory.clases.*;
 
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -313,6 +317,26 @@ public class Controlador {
 
         }
         return citasDisp;
+    }
+
+    /**
+     * Metodo que crea un HTML
+     */
+    public static void getHTML (String msg) {
+        try {
+            String path = System.getProperty("user.dir") + "\\src\\htmls\\";
+            File f = new File(path + "UltimoReporteHospitalizaciones.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Historial</title></head>");
+            bw.write("<body>");
+            bw.write("<p>" + msg + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     //Metodos accesores
 

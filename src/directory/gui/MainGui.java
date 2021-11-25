@@ -1,5 +1,6 @@
 package directory.gui;
 
+import directory.auxiliarclases.ArchiveManager;
 import directory.auxiliarclases.JsonManager;
 import directory.clases.*;
 import directory.controladores.controladores.Controlador;
@@ -22,6 +23,7 @@ public class MainGui extends JFrame{
   private JButton salirButton;
   private JLabel jlTitle;
   private JButton bajarJSONButton;
+  private JButton subirJson;
 
   public MainGui() {
     // Atributos.
@@ -109,6 +111,12 @@ public class MainGui extends JFrame{
       }
     });
 
+    subirJson.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        
+      }
+    });
     inciarSesionButton.addActionListener(new ActionListener() {
       /**
        * Abre ventana para logear como usuario.
@@ -122,6 +130,7 @@ public class MainGui extends JFrame{
       }
     });
   }
+
 
 
   public static void main(String[] args) {

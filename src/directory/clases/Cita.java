@@ -132,6 +132,20 @@ public class Cita {
     return "Cita " + String.valueOf(getIdentificador());
   }
 
+  public String printCitaHTML () {
+    String msg = "Cita: " + getIdentificador() + "\n";
+    msg += "Especialidad: " + getEspecialidad() + "\n";
+    msg += "Fecha Cita: " + getFechaCita()+ "\n";
+    msg += "Estado: " + getEstadoCita()+ "\n";
+    msg += "Hora: " + getHora()+ "\n";
+    msg += "Bitacora: " + bitacora+ "\n";
+    for (Diagnostico diagnostico : diagnosticos){
+      msg += "Diagnostico: " + diagnostico.printDiagnosticoHTML()+ "\n";
+    }
+
+    return msg;
+  }
+
   public void printCita() {
     String msg =
           "Cita{" +'\n' +

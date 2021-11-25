@@ -114,7 +114,7 @@ public class MainGui extends JFrame{
     subirJson.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        
+        System.out.println("No disponible");
       }
     });
     inciarSesionButton.addActionListener(new ActionListener() {

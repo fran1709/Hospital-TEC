@@ -172,9 +172,6 @@ public class AtenderCita extends JFrame{
           cita.printCita();
           JOptionPane.showMessageDialog(null,"La cita ha sido atendida!");
           setVisible(false);
-          DocAccount newDocAcc = new DocAccount();
-          newDocAcc.setVisible(true);
-
         }
       }
     });

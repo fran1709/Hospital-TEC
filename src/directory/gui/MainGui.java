@@ -37,8 +37,7 @@ public class MainGui extends JFrame{
     // usuario doctor
     ArrayList<String> especial = new ArrayList<String>();
     Date fecha = new Date();
-    Doctor one = new Doctor("fran17", "123", "Francisco Javier", "207710202",
-            1,especial, fecha);
+    /*
 
     Controlador.registrarDoctor("drMendez","123","Eduardo Mendez", "4578123565", 1, especial,fecha,1);
     // usuario enfermero
@@ -64,7 +63,18 @@ public class MainGui extends JFrame{
     Controlador.catalogoTratamientos.add(tratamiento);
     Controlador.catalogoTratamientos.add(tratamiento1);
     Controlador.catalogoTratamientos.add(tratamiento2);
+    
+     */
 
+    if (Controlador.catalogoTratamientos.isEmpty()){
+      Tratamiento tratamiento = new Tratamiento("Pastillas",1,"Medicamento");
+      Tratamiento tratamiento1 = new Tratamiento("Jarabe",1,"Medicamento");
+      Tratamiento tratamiento2 = new Tratamiento("Curita",1,"Sutura");
+
+      Controlador.catalogoTratamientos.add(tratamiento);
+      Controlador.catalogoTratamientos.add(tratamiento1);
+      Controlador.catalogoTratamientos.add(tratamiento2);
+    }
 
     bajarJSONButton.addActionListener(new ActionListener() {
       @Override

@@ -60,7 +60,6 @@ public class Cita {
    */
   public ArrayList<Tratamiento> tratamientosPorTipo(String tipo) {
     ArrayList<Tratamiento> trats = new ArrayList<>();
-
     for (Diagnostico diag : this.diagnosticos){
       trats.addAll(diag.tratamientosPorTipo(tipo));
     }

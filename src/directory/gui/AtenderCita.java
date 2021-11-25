@@ -122,8 +122,6 @@ public class AtenderCita extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         setVisible(false);
-        DocAccount newDocAcc = new DocAccount();
-        newDocAcc.setVisible(true);
       }
     });
     agregarDiagnosticoACitaButton.addActionListener(new ActionListener() {

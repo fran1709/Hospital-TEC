@@ -143,6 +143,26 @@ public class PacienteGUI extends JFrame {
 
           // Controlador para crear Paciente.
           Controlador.registrarPaciente(usuario,contrasehna,nombre,cedula,fecha,tipoSangre,nacionalidad,residencia,numeros,vacunas);
+
+          JOptionPane.showMessageDialog(null,"¡Registrado Exitosamente!");
+          tfName.setText(null);
+          tfUsuario.setText(null);
+          tfTelefono.setText(null);
+          tfCelular.setText(null);
+          tfResidencia.setText(null);
+          tfFarmaceutica.setText(null);
+          tfNombreVacuna.setText(null);
+          tfLote.setText(null);
+          tfContra.setText(null);
+          tfCedula.setText(null);
+          cbNacionalidad.setSelectedIndex(0);
+          cbDay.setSelectedIndex(0);
+          cbMonth.setSelectedIndex(0);
+          cbTipoSangre.setSelectedIndex(0);
+          cbYear.setSelectedIndex(0);
+          anhoVacuna.setSelectedIndex(0);
+          mesVacuna.setSelectedIndex(0);
+          diaVacuna.setSelectedIndex(0);
         }
       }
     });

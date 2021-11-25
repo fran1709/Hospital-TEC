@@ -1,6 +1,6 @@
 package directory.gui;
 
-import directory.auxiliarclases.JavaMailAPI;
+//import directory.auxiliarclases.JavaMailAPI;
 import directory.clases.*;
 import directory.controladores.controladores.Controlador;
 
@@ -33,6 +33,7 @@ public class RegistrarCita extends JFrame {
     setContentPane(RegistrandoCitaWindow);
     setTitle("Hospital TEC");
     setSize(450,400);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
 
@@ -44,7 +45,7 @@ public class RegistrarCita extends JFrame {
        */
       @Override
       public void actionPerformed(ActionEvent e) {
-
+        setVisible(false);
       }
     });
 
@@ -76,7 +77,7 @@ public class RegistrarCita extends JFrame {
               paciente.getCitas().add(newCita);
               JOptionPane.showMessageDialog(null,"Cita asignada");
               try {
-                JavaMailAPI.enviarCorreo(paciente.getNombre(),tfCorreo.getText(), newCita.printCitaHTML());
+                //JavaMailAPI.enviarCorreo(paciente.getNombre(),tfCorreo.getText(), newCita.printCitaHTML());
               } catch (Exception ex) {
                 ex.printStackTrace();
               }
@@ -115,8 +116,6 @@ public class RegistrarCita extends JFrame {
               DocAccount newDocAccount = new DocAccount();
               newDocAccount.setVisible(true);
             }
-
-
         }
       }
     });

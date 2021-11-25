@@ -29,7 +29,6 @@ public class CancelaCita extends JFrame{
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
 
-
     if (Controlador.usuario.getClass() == Paciente.class) {
         Paciente paciente = (Paciente) Controlador.usuario;
         ArrayList<Cita> citas = paciente.getCitas();

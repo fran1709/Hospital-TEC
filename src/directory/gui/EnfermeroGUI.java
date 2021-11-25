@@ -6,7 +6,6 @@ import directory.controladores.controladores.Controlador;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,21 +18,20 @@ public class EnfermeroGUI extends JFrame {
   private JLabel jlNombre;
   private JButton registrarButton;
   private JButton volverButton;
-  private JTextField textFieldCedula;
   private JTextField textFieldName;
-  private JComboBox comboBoxArea;
+  private JTextField textFieldCedula;
   private JComboBox cbLideradoPersonas;
   private JComboBox cbExpCapacitando;
   private JTextField textFieldContra;
   private JTextField textFieldUsuario;
-    private JComboBox comboBoxCentro;
-    private JTextField textFieldCodigoMedico;
+  private JComboBox comboBoxCentro;
 
-    public EnfermeroGUI() {
+
+  public EnfermeroGUI() {
     // Atributos.
     setContentPane(enfermeroWindow);
     setTitle("Hospital TEC");
-    setSize(450,300);
+    setSize(450,400);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
@@ -73,11 +71,11 @@ public class EnfermeroGUI extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
           // Validación de campos vacíos
-          if (textFieldName.getText().isEmpty()|| textFieldCedula.getText().isEmpty()) {
+          if (textFieldCedula.getText().isEmpty()|| textFieldName.getText().isEmpty()) {
               JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
-              textFieldCedula.setText(null);
               textFieldName.setText(null);
-              comboBoxArea.setSelectedIndex(0);
+              textFieldCedula.setText(null);
+              comboBoxCentro.setSelectedIndex(0);
               cbLideradoPersonas.setSelectedIndex(0);
               cbExpCapacitando.setSelectedIndex(0);
           }
@@ -105,6 +103,15 @@ public class EnfermeroGUI extends JFrame {
 
               // Controlador para crear Enfermero(a).
               Controlador.registrarEnfermero(nombre,usuario,contrasehna,cedula,dirigePersonas,expCapacitando,fecha,centroAtencion.getCodigo());
+
+              JOptionPane.showMessageDialog(null,"¡Registrado Exitosamente!");
+              textFieldUsuario.setText(null);
+              textFieldCedula.setText(null);
+              textFieldName.setText(null);
+              textFieldContra.setText(null);
+              comboBoxCentro.setSelectedIndex(0);
+              cbExpCapacitando.setSelectedIndex(0);
+              cbLideradoPersonas.setSelectedIndex(0);
           }
       }
     });

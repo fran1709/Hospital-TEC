@@ -16,6 +16,7 @@ public class Registrar extends JFrame{
   private JButton enfermeroAButton;
   private JButton secretarioAButton;
   private JButton pacienteButton;
+  private JButton centroMedicoButton;
 
   public Registrar() {
     // Atributos.
@@ -88,6 +89,19 @@ public class Registrar extends JFrame{
         setVisible(false);
         PacienteGUI newPacient = new PacienteGUI();
         newPacient.setVisible(true);
+      }
+    });
+
+    centroMedicoButton.addActionListener(new ActionListener() {
+      /**
+       * Abre la ventana para registrar un nuevo Centro Medico.
+       * @param e
+       */
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setVisible(false);
+        CentroMedic newMedicCenter = new CentroMedic();
+        newMedicCenter.setVisible(true);
       }
     });
   }

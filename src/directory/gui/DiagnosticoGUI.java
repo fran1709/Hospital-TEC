@@ -101,6 +101,7 @@ public class DiagnosticoGUI extends JFrame{
                     newDiagnostico.setTratamientos(tratamientos);
                     Controlador.catalogoDiagnosticos.add(newDiagnostico);
                     newDiagnostico.printDiagnostico();
+                    JOptionPane.showMessageDialog(null,"Diagnóstico agregado!");
                     setVisible(false);
 
                 }

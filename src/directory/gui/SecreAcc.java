@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * @author Francisco Ovares
+ */
 public class SecreAcc extends JFrame{
   private JPanel SecreAccWindow;
   private JButton cerrarSesionButton;

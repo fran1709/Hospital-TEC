@@ -36,7 +36,7 @@ public class DoctorGUI extends JFrame{
     // Atributos.
     setContentPane(docWindow);
     setTitle("Hospital TEC");
-    setSize(450,300);
+    setSize(450,400);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
@@ -82,11 +82,18 @@ public class DoctorGUI extends JFrame{
           // Controlador para crear Doctor(a)
           Controlador.registrarDoctor(usuario,contra,nombre,cedula,Integer.parseInt(codigoMedico),especialidades,fecha,centroAtencion.getCodigo());
 
+          JOptionPane.showMessageDialog(null,"¡Registrado Exitosamente!");
+          textFieldCedula.setText(null);
+          textFieldUsuario.setText(null);
+          textFieldNombre.setText(null);
+          textFieldCodigoMedico.setText(null);
+          TextFieldContra.setText(null);
+          comboBoxArea.setSelectedIndex(0);
+          comboBoxCentro.setSelectedIndex(0);
+
           for (Usuario doctor : Controlador.usuarios){
             System.out.println(doctor.toString());
           }
-
-
         }
 
       }
@@ -99,6 +106,7 @@ public class DoctorGUI extends JFrame{
         if (!especialidades.isEmpty()){}
         for (String esp : especialidades)
           System.out.println(esp);
+        JOptionPane.showMessageDialog(null,"Especialidad agregada!");
       }
     });
 

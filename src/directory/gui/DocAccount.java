@@ -78,7 +78,6 @@ public class DocAccount extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         Controlador.tmpPaciente = (Paciente) cbPacientes.getSelectedItem();
-        setVisible(false);
         AtenderCita atendiendo = new AtenderCita();
         atendiendo.setVisible(true);
       }
@@ -92,10 +91,8 @@ public class DocAccount extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         Controlador.tmpPaciente = (Paciente) cbPacientes2.getSelectedItem();
-
         RegistrarCita nuevaCita = new RegistrarCita();
         nuevaCita.setVisible(true);
-        setVisible(false);
       }
     });
 
@@ -109,7 +106,6 @@ public class DocAccount extends JFrame{
         Controlador.tmpPaciente = (Paciente) cbPacientes3.getSelectedItem();
         CancelaCita cancelacion = new CancelaCita();
         cancelacion.setVisible(true);
-        setVisible(false);
       }
     });
 

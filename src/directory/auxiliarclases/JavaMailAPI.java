@@ -49,8 +49,4 @@ public class JavaMailAPI {
         System.out.println("Correo enviado!");
 
     }
-
-
-
-
 }

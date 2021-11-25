@@ -67,6 +67,12 @@ public class SecretarioGUI extends JFrame {
           Date fecha = new Date();
           // Controlador para crear Secretario(a).
           Controlador.registrarSecretaria(usuario,contra,nombre,cedula,fecha,centroAtencion.getCodigo());
+          JOptionPane.showMessageDialog(null,"¡Registrado Exitosamente!");
+          textFieldCedula.setText(null);
+          textFieldName.setText(null);
+          textFieldUsuario.setText(null);
+          textFieldContrasehna.setText(null);
+          comboBoxArea.setSelectedIndex(0);
         }
       }
     });

@@ -1,5 +1,9 @@
 package directory.clases;
 
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +16,57 @@ public class FuncionarioMedicina extends Funcionario{
     /* FUNCIONALIDADES DOCTOR y ENFERMERO*/
 
     /** CITAS **/
+
+    public void reportarCitasHTML (ArrayList<Cita> citas) {
+        try {
+            File f = new File(".../src/htmls/UltimoReporteCitasFuncionarioM.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Citas</title></head>");
+            bw.write("<body>");
+            for (Cita cita : citas)
+                bw.write("<p>" + cita.toString() + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reportarDiagnosticoHTML (ArrayList<Diagnostico> citas) {
+        try {
+            File f = new File(".../src/htmls/UltimoReporteDiagnosticosFuncionarioM.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Diagnostico</title></head>");
+            bw.write("<body>");
+            for (Diagnostico cita : citas)
+                bw.write("<p>" + cita.toString() + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reportarTratamientoHTML (ArrayList<Tratamiento> citas) {
+        try {
+            File f = new File(".../src/htmls/UltimoReporteTratamientosFuncionarioM.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Tratamiento</title></head>");
+            bw.write("<body>");
+            for (Tratamiento cita : citas)
+                bw.write("<p>" + cita.toString() + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Metodo para cancelar cita de paciente
@@ -125,6 +180,7 @@ public class FuncionarioMedicina extends Funcionario{
         for (Paciente paciente : pacientes) {
             citas.addAll(paciente.citasDePacientePorFecha(fechaInicio,fechaFinal));
         }
+        reportarCitasHTML(citas);
         return citas;
     }
     /**
@@ -139,6 +195,7 @@ public class FuncionarioMedicina extends Funcionario{
         for (Paciente paciente : pacientes) {
             citas.addAll(paciente.citasDePacientePorEstado(estado));
         }
+        reportarCitasHTML(citas);
         return citas;
     }
     /**
@@ -152,6 +209,7 @@ public class FuncionarioMedicina extends Funcionario{
         for (Paciente paciente : pacientes) {
             pCitas.addAll(paciente.citasDePacientePorEspecialidad(especialidad));
         }
+        reportarCitasHTML(pCitas);
         return pCitas;
     }
 
@@ -170,6 +228,7 @@ public class FuncionarioMedicina extends Funcionario{
                 }
             }
         }
+        reportarTratamientoHTML(tratamientos);
         return tratamientos;
 
     }
@@ -187,7 +246,7 @@ public class FuncionarioMedicina extends Funcionario{
                 tratamientos.addAll(diagnostico.getTratamientos());
             }
         }
-
+        reportarTratamientoHTML(tratamientos);
         return tratamientos;
     }
 
@@ -209,7 +268,7 @@ public class FuncionarioMedicina extends Funcionario{
                 }
             }
         }
-
+        reportarTratamientoHTML(tratamientos);
         return tratamientos;
     }
 

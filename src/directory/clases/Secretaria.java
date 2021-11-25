@@ -1,5 +1,11 @@
 package directory.clases;
 
+import directory.auxiliarclases.Exportable;
+
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +14,7 @@ import java.util.Date;
 /**
  * @author Marco y Francisco
  */
-public class Secretaria extends Funcionario{
+public class Secretaria extends Funcionario implements Exportable {
     /**
      *
      * @param usuario
@@ -26,6 +32,39 @@ public class Secretaria extends Funcionario{
     }
 
     /* FUNCIONALIDADES SECRETARIA */
+
+    public void reportarCitasHTML (ArrayList<Cita> citas) {
+        try {
+            File f = new File(".../src/htmls/UltimoReporteCitasSecretaria.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Citas</title></head>");
+            bw.write("<body>");
+            for (Cita cita : citas)
+                bw.write("<p>" + cita.toString() + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reportarHistorial (String historial) {
+        try {
+            File f = new File(".../src/htmls/UltimoReporteHistorialSecretaria.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write("<html>");
+            bw.write("<head><title>Historial</title></head>");
+            bw.write("<body>");
+            bw.write("<p>" + historial + "</p>");
+            bw.write("</html>");
+            bw.close();
+            Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Metodo que cancela una cita
@@ -74,6 +113,7 @@ public class Secretaria extends Funcionario{
         for (Paciente paciente : pacientes) {
             citas.addAll(paciente.citasDePacientePorFecha(fechaInicio,fechaFinal));
         }
+        reportarCitasHTML(citas);
         return citas;
     }
     /**
@@ -88,6 +128,7 @@ public class Secretaria extends Funcionario{
         for (Paciente paciente : pacientes) {
             citas.addAll(paciente.citasDePacientePorEstado(estado));
         }
+        reportarCitasHTML(citas);
         return citas;
     }
     /**
@@ -102,6 +143,7 @@ public class Secretaria extends Funcionario{
         for (Paciente paciente : pacientes) {
             citas.addAll(paciente.citasDePacientePorEspecialidad(especialidad));
         }
+        reportarCitasHTML(citas);
         return citas;
     }
 
@@ -134,6 +176,7 @@ public class Secretaria extends Funcionario{
             msg += paciente.historialPaciente();
 
         }
+        reportarHistorial(msg);
         return msg;
     }
 
@@ -146,4 +189,13 @@ public class Secretaria extends Funcionario{
                 "Contraseña: " + getContrasenha() + "\n"+
                 '}';
     }
+
+    @Override
+    public void exportarPDF() {}
+
+    @Override
+    public void exportarCSV() {}
+
+    @Override
+    public void exportarHTML() {}
 }

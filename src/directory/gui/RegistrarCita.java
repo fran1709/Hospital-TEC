@@ -82,9 +82,6 @@ public class RegistrarCita extends JFrame {
                 ex.printStackTrace();
               }
               setVisible(false);
-              PacientAcc newPatientAcc = new PacientAcc();
-              newPatientAcc.setVisible(true);
-
             } else if (Controlador.usuario.getClass() == Secretaria.class) {
               Paciente paciente = Controlador.tmpPaciente;
               Secretaria secretaria = (Secretaria) Controlador.usuario;
@@ -92,9 +89,6 @@ public class RegistrarCita extends JFrame {
               secretaria.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
               JOptionPane.showMessageDialog(null,"Cita asignada");
               setVisible(false);
-              SecreAcc newDocAcc = new SecreAcc();
-              newDocAcc.setVisible(true);
-
             }
             else if (Controlador.usuario.getClass() == Enfermero.class){
               Paciente paciente = Controlador.tmpPaciente;
@@ -103,8 +97,6 @@ public class RegistrarCita extends JFrame {
               enfermero.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
               JOptionPane.showMessageDialog(null,"Cita asignada");
               setVisible(false);
-              NuserAccount newEnfermeroACC = new NuserAccount();
-              newEnfermeroACC.setVisible(true);
             }
             else if (Controlador.usuario.getClass() == Doctor.class){
               Paciente paciente = Controlador.tmpPaciente;
@@ -113,8 +105,6 @@ public class RegistrarCita extends JFrame {
               doctor.asignarCita(paciente,cbEspecialidades.getSelectedItem().toString(),fecha,tfObervation.getText(),Controlador.idCita,Integer.parseInt(cbHora.getSelectedItem().toString()));
               JOptionPane.showMessageDialog(null,"Cita asignada");
               setVisible(false);
-              DocAccount newDocAccount = new DocAccount();
-              newDocAccount.setVisible(true);
             }
         }
       }

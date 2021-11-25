@@ -1,5 +1,11 @@
 package directory.clases;
 
+import directory.auxiliarclases.Exportable;
+
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +14,7 @@ import java.util.Date;
 /**
  * @author Marco y Francisco
  */
-public class Doctor extends FuncionarioMedicina{
+public class Doctor extends FuncionarioMedicina implements Exportable {
   // Atributos.
   private int codigoMedico;
   private ArrayList<String> especialidades;
@@ -87,4 +93,13 @@ public class Doctor extends FuncionarioMedicina{
             "especialidades=" + especialidades + "\n"+
             '}';
   }
+
+  @Override
+  public void exportarPDF() {}
+
+  @Override
+  public void exportarCSV() {}
+
+  @Override
+  public void exportarHTML() {}
 }

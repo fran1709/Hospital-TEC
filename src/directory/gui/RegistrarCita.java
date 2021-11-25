@@ -35,11 +35,7 @@ public class RegistrarCita extends JFrame {
     setSize(450,400);
     setLocationRelativeTo(null);
     setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("Icon/logo.png"))).getImage());
-
-    if (!(Controlador.usuario.getClass() == Paciente.class)) {
-      correoBTN.setVisible(false);
-      tfCorreo.setVisible(false);
-    }
+    
 
     volverButton.addActionListener(new ActionListener() {
       /**

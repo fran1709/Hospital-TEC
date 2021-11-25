@@ -23,13 +23,14 @@ public class DoctorGUI extends JFrame{
   private JLabel jlArea;
   private JComboBox comboBoxArea;
   private JTextField textFieldUsuario;
-  private JTextField textFieldCedula;
+  private JTextField textFieldNombre;
   private JButton registrarButton;
   private JLabel jlCodigo;
   private JTextField textFieldCodigoMedico;
   private JTextField TextFieldContra;
   private JButton agregarEspecialidad;
   private JComboBox comboBoxCentro;
+  private JTextField textFieldCedula;
 
   public DoctorGUI() {
     // Atributos.
@@ -59,10 +60,10 @@ public class DoctorGUI extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
         // Validación de campos vacíos
-        if (textFieldUsuario.getText().isEmpty() || textFieldCedula.getText().isEmpty() ||
+        if (textFieldUsuario.getText().isEmpty() || textFieldNombre.getText().isEmpty() ||
             textFieldCodigoMedico.getText().isEmpty() ) {
           JOptionPane.showMessageDialog(null,"Ingrese datos válidos!");
-          textFieldCedula.setText(null);
+          textFieldNombre.setText(null);
           textFieldUsuario.setText(null);
           comboBoxArea.setSelectedIndex(0);
         }
@@ -70,7 +71,7 @@ public class DoctorGUI extends JFrame{
         // La fecha se obtiene con LocalDate.now().
         else {
           // Atributos del nuevo objeto.
-          String nombre = textFieldUsuario.getText();
+          String nombre = textFieldNombre.getText();
           String cedula = textFieldCedula.getText();
           String codigoMedico = textFieldCodigoMedico.getText();
           CentroAtencion centroAtencion = (CentroAtencion) comboBoxArea.getSelectedItem();

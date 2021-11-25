@@ -63,7 +63,7 @@ public class MainGui extends JFrame{
     Controlador.catalogoTratamientos.add(tratamiento);
     Controlador.catalogoTratamientos.add(tratamiento1);
     Controlador.catalogoTratamientos.add(tratamiento2);
-    
+
      */
 
     if (Controlador.catalogoTratamientos.isEmpty()){

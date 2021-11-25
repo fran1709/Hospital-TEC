@@ -1,5 +1,9 @@
 package directory.clases;
 
+import directory.auxiliarclases.Exportable;
+
+import java.awt.Desktop;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,7 +11,7 @@ import java.util.Date;
 /**
  * @author Marco y Francisco
  */
-public class Paciente extends Usuario{
+public class Paciente extends Usuario implements Exportable{
   //Atributos
   private Date fechaNacimiento;
   private String tipoSangre;
@@ -58,6 +62,73 @@ public class Paciente extends Usuario{
 
   /* FUNCIONALIDADES DEL PACIENTE */
 
+  public void reportarCitasHTML (ArrayList<Cita> citas) {
+    try {
+      File f = new File(".../src/htmls/UltimoReporteCitasPaciente.html");
+      BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+      bw.write("<html>");
+      bw.write("<head><title>Citas</title></head>");
+      bw.write("<body>");
+      for (Cita cita : citas)
+        bw.write("<p>" + cita.toString() + "</p>");
+      bw.write("</html>");
+      bw.close();
+      Desktop.getDesktop().browse(f.toURI());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void reportarDiagnosticoHTML (ArrayList<Diagnostico> citas) {
+    try {
+      File f = new File(".../src/htmls/UltimoReporteDiagnosticosPaciente.html");
+      BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+      bw.write("<html>");
+      bw.write("<head><title>Diagnostico</title></head>");
+      bw.write("<body>");
+      for (Diagnostico cita : citas)
+        bw.write("<p>" + cita.toString() + "</p>");
+      bw.write("</html>");
+      bw.close();
+      Desktop.getDesktop().browse(f.toURI());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void reportarTratamientoHTML (ArrayList<Tratamiento> citas) {
+    try {
+      File f = new File(".../src/htmls/UltimoReporteTratamientosPaciente.html");
+      BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+      bw.write("<html>");
+      bw.write("<head><title>Tratamiento</title></head>");
+      bw.write("<body>");
+      for (Tratamiento cita : citas)
+        bw.write("<p>" + cita.toString() + "</p>");
+      bw.write("</html>");
+      bw.close();
+      Desktop.getDesktop().browse(f.toURI());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void reportarHistorial () {
+    try {
+      File f = new File(".../src/htmls/UltimoReporteHistorialPaciente.html");
+      BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+      bw.write("<html>");
+      bw.write("<head><title>Historial</title></head>");
+      bw.write("<body>");
+      bw.write("<p>" + this.historial + "</p>");
+      bw.write("</html>");
+      bw.close();
+      Desktop.getDesktop().browse(f.toURI());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * Agregar cita ya validada a la lista de citas
    * @param cita cita que va a ser anhadida
@@ -92,6 +163,7 @@ public class Paciente extends Usuario{
         tmp.add(cita);
       }
     }
+    reportarCitasHTML(tmp);
     return tmp;
   }
 
@@ -108,6 +180,7 @@ public class Paciente extends Usuario{
         tmp.add(cita);
       }
     }
+    reportarCitasHTML(tmp);
     return tmp;
   }
 
@@ -124,6 +197,7 @@ public class Paciente extends Usuario{
         tmp.add(cita);
       }
     }
+    reportarCitasHTML(tmp);
     return tmp;
   }
   /** CONSULTAS DE DIAGNOSTICOS **/
@@ -140,6 +214,7 @@ public class Paciente extends Usuario{
           tmp.add(diagnostico);
       }
     }
+    reportarDiagnosticoHTML(tmp);
     return tmp;
   }
   /**
@@ -156,6 +231,7 @@ public class Paciente extends Usuario{
           tmp.add(diagnostico);
       }
     }
+    reportarDiagnosticoHTML(tmp);
     return tmp;
   }
 
@@ -171,6 +247,7 @@ public class Paciente extends Usuario{
     for (Cita cita : pCitas) {
       tmp.addAll(cita.getDiagnosticos());
     }
+    reportarDiagnosticoHTML(tmp);
     return tmp;
   }
 
@@ -188,6 +265,7 @@ public class Paciente extends Usuario{
     for (Diagnostico diagnostico : pDiagnosticos) {
       tmp.addAll(diagnostico.getTratamientos());
     }
+    reportarTratamientoHTML(tmp);
     return tmp;
   }
 
@@ -201,6 +279,7 @@ public class Paciente extends Usuario{
     for (Cita cita : this.citas) {
       trats.addAll(cita.tratamientosPorTipo(tipo));
     }
+    reportarTratamientoHTML(trats);
     return trats;
   }
 
@@ -214,6 +293,7 @@ public class Paciente extends Usuario{
     for (Cita cita : this.citas) {
       trats.addAll(cita.tratamientosPorNombre(nombre));
     }
+    reportarTratamientoHTML(trats);
     return trats;
   }
 
@@ -267,7 +347,10 @@ public class Paciente extends Usuario{
    * Pone el historial de hospitalizaciones
    * @return
    */
-  public String historialPaciente(){return this.historial;}
+  public String historialPaciente() {
+    reportarHistorial();
+    return this.historial;
+  }
   /**
    * Metodo para actualizar historial de paciente
    * @return
@@ -275,6 +358,10 @@ public class Paciente extends Usuario{
   public void actualizarHistorial(String bitacora) {
     this.historial += bitacora +" Fecha: " + LocalDate.now();
   }
+
+  public void exportarPDF() {}
+  public void exportarHTML(){}
+  public void exportarCSV(){}
 
   /**
    * Metodo para agregar hospitalizacion
